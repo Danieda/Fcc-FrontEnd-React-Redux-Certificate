@@ -23,18 +23,21 @@ switch(action.type)
 
 const store = createStore(messageReducer)
 
+
 class QuoteMachine extends React.Component{
   constructor(props){
     super(props)
       this.state = {
-        messages: 'PLACEHOLDER'
+        messages: 'Quote?',
+        names: 'Quotee NAME'
       }
     this.randomQuoteHandle = this.randomQuoteHandle.bind(this)
   }
   
   randomQuoteHandle(){
    this.setState({
-     messages: arrQuote[Math.floor(Math.random() * arrQuote.length)].Quote
+     messages: arrQuote[ranNum()].Quote,
+     names: arrQuote[ranNum()].Name
    })
   }
 
@@ -43,8 +46,9 @@ class QuoteMachine extends React.Component{
     return(
       <div>
          <button onClick={this.randomQuoteHandle}>QUOTE BUTTON</button>
-          {this.state.messages}
-    
+          <p>{this.state.messages}</p>
+          <p>{this.state.names}</p>
+          {ranNum()}
       </div>
     )
   }
@@ -104,4 +108,9 @@ const arrQuote = [
  ]
 
 
+ const ranNum = () => {
+  var num = Math.floor(Math.random() * arrQuote.length)
+  return(num)
+   
+ }
 export default QuoteMachine
