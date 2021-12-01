@@ -1,1 +1,1 @@
-# Fcc-FrontEnd-React-Redux-Certificate
+# Fcc-FrontEnd-js-ReactRedux-Certificate
