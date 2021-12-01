@@ -1,5 +1,6 @@
 import React from "react"
-import { Provider } from "react-redux";
+import { Provider } from "redux";
+import { createStore } from 'redux'
 
 const ADD = "ADD";
 
@@ -20,26 +21,30 @@ switch(action.type)
 
 
 
-const store = Redux.createStore(messageReducer)
+const store = createStore(messageReducer)
 
 class QuoteMachine extends React.Component{
   constructor(props){
     super(props)
       this.state = {
-        messages: []
+        messages: 'PLACEHOLDER'
       }
-    
+    this.randomQuoteHandle = this.randomQuoteHandle.bind(this)
   }
   
   randomQuoteHandle(){
-
+   this.setState({
+     messages: arrQuote[Math.floor(Math.random() * arrQuote.length)].Quote
+   })
   }
 
   render(){
 
     return(
       <div>
-         
+         <button onClick={this.randomQuoteHandle}>QUOTE BUTTON</button>
+          {this.state.messages}
+    
       </div>
     )
   }
@@ -49,6 +54,8 @@ class QuoteMachine extends React.Component{
 function Quotes() {
   return <h1>Quote Machine</h1>
 }
+
+
 const arrQuote = [
   {
     Quote:"Don't need to say please to no man for a happy tune.",
@@ -96,6 +103,5 @@ const arrQuote = [
  }
  ]
 
- const randQuote = arrQuote[Math.random(arrQuote.length -1)]
- 
+
 export default QuoteMachine
