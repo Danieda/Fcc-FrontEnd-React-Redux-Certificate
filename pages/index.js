@@ -16,7 +16,7 @@ export default function Home() {
         </h1>
       <main className={styles.container}>
      
-        <img src={logo} className={styles.Appheader} alt="logo"/>
+        <img src="/logo.png" className={styles.Appheader} alt="logo"/>
         <div className={styles.box1} >box1</div>
         <div className={styles.box2} >box2 </div>
         <div className={styles.box3} >box3</div>

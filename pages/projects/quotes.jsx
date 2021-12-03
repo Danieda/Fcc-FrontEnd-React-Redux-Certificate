@@ -1,21 +1,37 @@
 import React from "react"
-import { Provider } from "redux";
+import { Provider } from "react-redux";
 import { createStore } from 'redux'
+import { connect } from 'react-redux'
+import quote from '../../fodder/quoteList.js'
 
 const ADD = "ADD";
 
+
 const addMessage = (message) => {
   return{
-    type: 'ADD',
+    type: ADD,
     message: message
   }
 }
 
-const messageReducer = (state = [], action) => {
+const initialState = {
+  defaultQuote: quote[1]
+}
+
+
+
+const messageReducer = (state = initialState.defaultQuote,   action) => {
 switch(action.type)
 {
   case ADD:
-    return []
+    return (
+      state = action.message
+     )
+     default:{
+       return(
+       state = initialState.defaultQuote
+       )
+     }
 }
 }
 
@@ -23,94 +39,101 @@ switch(action.type)
 
 const store = createStore(messageReducer)
 
+class Structure extends React.Component{
+  constructor(props){
+    super(props)
+    this.state = {
+      quote: this.props.quote,
+      name: this.props.name,
+      handle: this.props.handle
+    }
+  }
+  render(){
+    return(
+      <div>
 
+<button onClick={this.state.handle}>NonWorking</button>
+ 
+
+        
+      </div>
+    )
+  }
+}
 class QuoteMachine extends React.Component{
   constructor(props){
     super(props)
       this.state = {
-        messages: 'Quote?',
-        names: 'Quotee NAME'
+       // messages: 'Quote?',
+       // names: 'Quotee NAME',
+        value: 0
       }
     this.randomQuoteHandle = this.randomQuoteHandle.bind(this)
   }
   
   randomQuoteHandle(){
+    this.props.submitNewQuote(quote[this.state.value])
    this.setState({
-     messages: arrQuote[ranNum()].Quote,
-     names: arrQuote[ranNum()].Name
+    // messages: quote[this.state.value].Quote,
+     //names: quote[this.state.value].Name,
+     value: Math.floor(Math.random() * quote.length)
    })
   }
 
   render(){
+      if (!this.state.value === 0) {
+        return(
+      
+          <div>
+             
+             <button onClick={this.randomQuoteHandle}>QUOTE BUTTON</button>
+            <Structure quote={this.props.messages.Quote} name={this.props.messages.Name} handle={this.randomQuoteHandle}/>
+                   <p>{this.props.messages.Quote}</p>
+                   <p>{this.props.messages.Name}</p>
+                  
+             
+            {Math.floor(Math.random() * quote.length)}
+          </div>
+        )
+      }
 
-    return(
-      <div>
-         <button onClick={this.randomQuoteHandle}>QUOTE BUTTON</button>
-          <p>{this.state.messages}</p>
-          <p>{this.state.names}</p>
-          {ranNum()}
-      </div>
-    )
+      else{
+        return(
+          
+          <div>
+            <button onClick={this.randomQuoteHandle}>QUOTE BUTTON</button>
+            <Structure quote={this.props.messages.Quote} name={this.props.messages.Name}/>
+            <p>{this.props.messages.Quote}</p>
+            <p>{this.props.messages.Name}</p>
+            </div>
+        )
+      }
+    
   }
 }
 
 
-function Quotes() {
-  return <h1>Quote Machine</h1>
+const mapStateToProps = (state) => {
+  return{messages : state
+  }
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    submitNewQuote: (newQuote) => {
+      dispatch(addMessage(newQuote))
+    }
+  }
 }
 
+const Container = connect (mapStateToProps, mapDispatchToProps)(QuoteMachine);
 
-const arrQuote = [
-  {
-    Quote:"Don't need to say please to no man for a happy tune.",
-    Name:"Neil Diamond (1941 - ), Cracklin' Rose"
-  },
-  {
-    Quote:"In modern America, anyone who attempts to write satirically about the events of the day finds it difficult to concoct a situation so bizarre that it may not actually come to pass while the article is still on the presses.",
-   Name:"Calvin Trillin (1935 - )"
-  },
-  {
-    Quote:"While there's life, there's hope.",
-    Name:"Cicero (106 BC - 43 BC), Ad Atticum"
-  },
- {
-   Quote:"You only live once - but if you work it right, once is enough.",
-   Name:"Joe E. Lewis"
- },
- {
-   Quote:"If you forgo your plan, you also have to forgo fear.",
-   Name:"Eric Schmidt, University of Pennsylvania Commencement Address, 2009"
- },
- {
-   Quote:"Waste not fresh tears over old griefs.",
-   Name:"Euripides (484 BC - 406 BC)"
- },
- {
-   Quote:"The one thing more difficult than following a regimen is not imposing it on others.",
-   Name:"Marcel Proust (1871 - 1922)"
- },
- {
-   Quote:"We judge ourselves by what we feel capable of doing, while others judge us by what we have already done.",
-   Name:"Henry Wadsworth Longfellow (1807 - 1882)"
- },
- {
-   Quote:"About the only thing that comes to us without effort is old age.",
-   Name:"Gloria Pitzer, in Reader's Digest, 1979"
- },
- {
-   Quote:"Humor is just another defense against the universe.",
-   Name:"Mel Brooks (1926 - )"
- },
- {
-   Quote:"Everyone's a hero in their own way, in their own not that heroic way.",
-   Name:"Joss Whedon, Zack Whedon, Maurissa Tancharoen, and Jed Whedon, Dr. Horrible's Sing Along Blog, 2008"
+ class AppWrapper extends React.Component{
+   render(){
+     return(
+        <Provider store={store}>
+          <Container/>
+        </Provider>
+     )
+   }
  }
- ]
-
-
- const ranNum = () => {
-  var num = Math.floor(Math.random() * arrQuote.length)
-  return(num)
-   
- }
-export default QuoteMachine
+export default AppWrapper

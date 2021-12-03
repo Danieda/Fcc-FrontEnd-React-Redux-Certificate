@@ -160,14 +160,14 @@
 }
 
 .Appheader {
-  background-color: #282c34;
-  min-height: 50vh;
+
+  min-height: 30vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  height: 30px;
   grid-area: 1/2;
 }
 
