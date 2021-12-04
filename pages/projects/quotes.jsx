@@ -4,6 +4,7 @@ import { createStore } from 'redux'
 import { connect } from 'react-redux'
 import quote from '../../fodder/quoteList.js'
 import styles from '../../styles/quotes.module.css'
+import Link from 'next/link'
 
 const ADD = "ADD";
 
@@ -51,7 +52,12 @@ class Structure extends React.Component{
   render(){
     return(
      <div>
-       <header> <h1>Quote Machine</h1></header> 
+       <div>
+       <Link href="../" passHref>
+              <h2>Back</h2>
+          </Link>
+       <hr/>
+       <header> <h1>Quote Machine</h1></header> </div>
       
       
       <div id={styles.Main}>
@@ -70,7 +76,7 @@ class Structure extends React.Component{
 
         </div>
        
-        <footer><a href="https://github.com/Danieda/Fcc-FrontEnd-React-Redux-Certificate">View Source</a></footer>
+        <footer><a href="https://github.com/Danieda/Fcc-FrontEnd-React-Redux-Certificate"><h3>View Source</h3></a></footer>
         </div>
      
     )

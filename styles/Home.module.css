@@ -13,6 +13,10 @@
   
 
 }
+.box1:hover{
+ background-color: skyblue;
+ width: 480px
+}
 .container{
  
   font-size: 40px;
@@ -31,6 +35,7 @@
 
  
 }
+
 
 .Applogo {
   height: 20vmin;

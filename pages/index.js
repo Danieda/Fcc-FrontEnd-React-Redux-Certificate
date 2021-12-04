@@ -18,7 +18,9 @@ export default function Home() {
       <main className={styles.container}>
      
         <img src="/logo.png" className={styles.Appheader} alt="logo"/>
-        <div className={styles.box1} >box1</div>
+        <Link href="/projects/quotes" passHref>
+        <img src="/Quote.png" className={styles.box1} alt="QuoteBox"/>
+        </Link>
         <div className={styles.box2} >box2 </div>
         <div className={styles.box3} >box3</div>
         <div className={styles.box4} >box4 </div>

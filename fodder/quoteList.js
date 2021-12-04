@@ -3,10 +3,7 @@ var arrQuote = [
       Quote:"' Don't need to say please to no man for a happy tune. '",
       Name:"Neil Diamond (1941 - ), Cracklin' Rose "
     },
-    {
-      Quote:"' In modern America, anyone who attempts to write satirically about the events of the day finds it difficult to concoct a situation so bizarre that it may not actually come to pass while the article is still on the presses. '",
-     Name:"Calvin Trillin (1935 - )  "
-    },
+ 
     {
       Quote:"' While there's life, there's hope. '",
       Name:"Cicero (106 BC - 43 BC), Ad Atticum"
