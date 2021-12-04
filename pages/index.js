@@ -46,7 +46,7 @@ export default function Home() {
 
       <footer className={styles.footer}>
         <a
-          href="https://github.com/Danieda/Fcc-FrontEnd-js-ReactRedux-Certificate"
+          href="https://github.com/Danieda"
           target="_blank"
           rel="noopener noreferrer"
         >
