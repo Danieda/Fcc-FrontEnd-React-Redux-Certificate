@@ -1,0 +1,58 @@
+#QuoteBox{
+
+   background: #434861;
+
+   width: 50%;
+   height: 550px;
+   border: 5px solid #362142;
+   border-radius: 25px;
+}
+#QuoteText{
+   
+   text-align: center;
+   margin-left: 10%;
+   margin-right: 10%;
+   margin-top: 12%;
+   color: #ccbed1;
+   font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+   font-size: 20px;
+   overflow: hidden;
+}
+#Main{
+    background: #282c34;
+    min-height: 100vh; /* minimum height = screen height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+  
+}
+#button{
+color:deeppink;
+background: #6d3982;
+border-radius:5px;
+border: solid purple;
+margin-bottom: 2%;
+height: 70px;
+width: 100%;
+font-size: 20px;
+
+margin-top: 5%;
+}
+#button:hover{
+ background:#a06ca6;
+}
+#tweet{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    background-color: #a9c4cf;
+    border-radius: 50px;
+    border: solid#84a2ad;
+  
+    text-align: center;
+    
+}
+#tweet:hover{
+    color: purple;
+    font-size: 20px;
+    background-color: #68b9de;
+}

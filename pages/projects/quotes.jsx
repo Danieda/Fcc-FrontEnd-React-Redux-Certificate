@@ -3,6 +3,7 @@ import { Provider } from "react-redux";
 import { createStore } from 'redux'
 import { connect } from 'react-redux'
 import quote from '../../fodder/quoteList.js'
+import styles from '../../styles/quotes.module.css'
 
 const ADD = "ADD";
 
@@ -44,22 +45,37 @@ class Structure extends React.Component{
     super(props)
     this.state = {
       quote: this.props.quote,
-      name: this.props.name,
-      handle: this.props.handle
+      name: this.props.name
     }
   }
   render(){
     return(
-      <div>
+     <div>
+       <header> <h1>Quote Machine</h1></header> 
+      
+      
+      <div id={styles.Main}>
+      
+  <div id={styles.QuoteBox}> 
+ <h2>Generate a Quote</h2>
+  <div id={styles.QuoteText}>
+  
+  <p>{this.props.quote}</p>
+  <p>{this.props.name}</p>
 
-<button onClick={this.state.handle}>NonWorking</button>
- 
+</div>
+<button onClick={this.props.handle} id={styles.button}>Get a Quote!</button>
+<p><a href="https://twitter.com/?lang=en" id={styles.tweet}>Tweet this quote!</a></p>
+</div>
 
-        
-      </div>
+        </div>
+       
+        <footer><a href="https://github.com/Danieda/Fcc-FrontEnd-React-Redux-Certificate">View Source</a></footer>
+        </div>
+     
     )
   }
-}
+}   
 class QuoteMachine extends React.Component{
   constructor(props){
     super(props)
@@ -86,10 +102,9 @@ class QuoteMachine extends React.Component{
       
           <div>
              
-             <button onClick={this.randomQuoteHandle}>QUOTE BUTTON</button>
+           
             <Structure quote={this.props.messages.Quote} name={this.props.messages.Name} handle={this.randomQuoteHandle}/>
-                   <p>{this.props.messages.Quote}</p>
-                   <p>{this.props.messages.Name}</p>
+       
                   
              
             {Math.floor(Math.random() * quote.length)}
@@ -101,10 +116,9 @@ class QuoteMachine extends React.Component{
         return(
           
           <div>
-            <button onClick={this.randomQuoteHandle}>QUOTE BUTTON</button>
-            <Structure quote={this.props.messages.Quote} name={this.props.messages.Name}/>
-            <p>{this.props.messages.Quote}</p>
-            <p>{this.props.messages.Name}</p>
+          
+            <Structure quote={this.props.messages.Quote} name={this.props.messages.Name} handle={this.randomQuoteHandle}/>
+
             </div>
         )
       }
