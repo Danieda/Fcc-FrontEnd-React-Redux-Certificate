@@ -28,28 +28,29 @@ export default function Home() {
  
       </main>
       <div className={styles.grid}>
-      <Link href="/projects/quotes" passHref>
+      <Link href="https://github.com/Danieda/Fcc-FrontEnd-React-Redux-Certificate" passHref>
             <div className={styles.card}>
-              <h2>Quote Machine &rarr;</h2>
-              <p>Quote machine description</p>
+              <h2>My Github &rarr;</h2>
+          
             </div>
           </Link>
 
-          <Link href="/projects/markdown-previewer" className={styles.card} passHref>
+          <Link href="https://scarletkeep.com/" className={styles.card} passHref>
             <div className={styles.card}>
-              <h2>Markdown Previewer &rarr;</h2>
-              <p>Markdown previewer description</p>
+              <h2>Our Website &rarr;</h2>
+              <p> A indie game developer website</p>
             </div>
           </Link>
 
     </div>
-    <a href="https://www.freecodecamp.org/learn/front-end-development-libraries/">placeholder</a>
+
       <footer className={styles.footer}>
         <a
           href="https://github.com/Danieda/Fcc-FrontEnd-js-ReactRedux-Certificate"
           target="_blank"
           rel="noopener noreferrer"
         >
+          <hr/>
           Source Code
         </a>
       </footer>
