@@ -1,0 +1,22 @@
+#InputBox{
+width: 50vh;
+height: 80vh;
+background:#9aa19d;
+border: 10px solid #232423;
+}
+#InputResult{
+background: #d9d9d9;
+width: 50vh;
+height: 80vh;
+border: 10px solid #232423;
+padding: 10px;
+}
+#holder{
+    display: grid;
+    grid-template-columns: repeat(2,0fr);
+    grid-template-rows: minmax(500px, auto);
+    justify-content: center;
+    align-items: center;
+    grid-gap: 5px;
+    background: #404743;   
+}

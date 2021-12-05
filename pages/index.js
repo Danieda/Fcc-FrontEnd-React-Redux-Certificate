@@ -13,16 +13,21 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <h1 className={styles.title}>
-          Welcome to myFrontend Development Libraries Certification Projects
+          Welcome to my Frontend Development Libraries Certification Projects
         </h1>
+          <h2>React & Redux</h2>
       <main className={styles.container}>
-     
+        
         <img src="/logo.png" className={styles.Appheader} alt="logo"/>
         <Link href="/projects/quotes" passHref>
         <img src="/Quote.png" className={styles.box1} alt="QuoteBox"/>
         </Link>
-        <div className={styles.box2} >box2 </div>
-        <div className={styles.box3} >box3</div>
+        <Link href="/projects/markdown-previewer" passHref>
+        <img src="/Quote.png" className={styles.box2} alt="markdown-previewer"/>
+        </Link>
+        <Link href="/projects/drum-machine" passHref>
+        <img src="/Quote.png" className={styles.box3} alt="drum-machine"/>
+        </Link>
         <div className={styles.box4} >box4 </div>
         <div className={styles.box5} >box5</div>
  
