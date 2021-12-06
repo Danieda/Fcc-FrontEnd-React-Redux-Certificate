@@ -147,7 +147,7 @@ const mapDispatchToProps = (dispatch) => {
 
 const Container = connect(mapStateToProps, mapDispatchToProps)(QuoteMachine);
 
-class AppWrapper extends React.Component {
+class QuoteWrapper extends React.Component {
   render() {
     return (
       <Provider store={store}>
@@ -156,4 +156,4 @@ class AppWrapper extends React.Component {
     )
   }
 }
-export default AppWrapper
+export default  QuoteWrapper
