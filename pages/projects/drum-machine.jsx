@@ -121,7 +121,7 @@ function DrumMachine() {
   );
 }
 
-export default function App() {
+export default function Drum() {
   return (
     <Provider store={store}>
       <DrumMachine />
