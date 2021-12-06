@@ -1,0 +1,52 @@
+
+#drumMachine{
+  
+    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    text-align: center ;  
+    justify-items: center;
+     padding: 100px;
+     width: 100%;
+     height: 100%;
+    
+}
+#drumDisplay{
+    position: relative;
+    justify-content: center;
+    color: purple;
+ 
+  
+}
+#drumBox{
+    background: #143b52;
+    margin-left: 25%;
+    margin-right: 25%;
+    position: relative;
+    top: 30%;
+    justify-content: center;
+    position: relative;
+    border: 10px solid #556656;
+    
+}
+.drumButton{
+    
+    
+ 
+  background: green;
+  width: 200px;
+  height: 50px;
+
+}
+#drumBG{
+
+    width: 100%;
+    height: 100vh;
+    justify-items: center;
+    align-items: center;
+    background: #222330;
+ 
+    background-position: center;
+  
+}

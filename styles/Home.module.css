@@ -15,11 +15,18 @@
 }
 .box1:hover{
  background-color: skyblue;
-
 }
 .box2:hover{
   background-color: skyblue;
- 
+ }
+ .box3:hover{
+  background-color: skyblue;
+ }
+ .box4:hover{
+  background-color: skyblue;
+ }
+ .box5:hover{
+  background-color: skyblue;
  }
 .container{
  

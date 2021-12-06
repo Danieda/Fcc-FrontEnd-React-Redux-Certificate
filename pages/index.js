@@ -26,9 +26,11 @@ export default function Home() {
         <img src="/Quote.png" className={styles.box2} alt="markdown-previewer"/>
         </Link>
         <Link href="/projects/drum-machine" passHref>
-        <img src="/Quote.png" className={styles.box3} alt="drum-machine"/>
+        <img src="/drum.png" className={styles.box3} alt="drum-machine"/>
         </Link>
-        <div className={styles.box4} >box4 </div>
+        <Link href="/projects/calculator" passHref>
+        <img src="/Calc.png" className={styles.box4} alt="calculator"/>
+        </Link>
         <div className={styles.box5} >box5</div>
  
       </main>

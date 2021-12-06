@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import { useSelector, useDispatch, Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
+import styles from "../../styles/drum.module.css"
+import Link from 'next/link'
 
 const displayTextSlice = createSlice({
   name: "displayText",
@@ -25,7 +27,7 @@ const store = configureStore({
 
 function DrumPad(props) {
   const dispatch = useDispatch();
-  function playAudio(id)  {
+  function playAudio(id) {
     if (!id) {
       return;
     }
@@ -42,7 +44,7 @@ function DrumPad(props) {
   return (
     <button
       id={"pad-" + props.trigger}
-      className="drum-pad font-xl font-bold rounded p-2 m-1 bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 shadow-lg"
+      className={styles.drumButton}
       onClick={() => playAudio(props.trigger)}
     >
       <audio id={props.trigger} className="clip" src={props.clip} />
@@ -54,54 +56,68 @@ function DrumPad(props) {
 function DrumMachine() {
   const displayText = useSelector((state) => state.displayText.value);
   return (
-    <div
-      className="container mx-auto grid grid-cols-5 grid-rows-3 gap-2 grid-flow-row px-4 py-6 bg-gray-700 text-center w-3/4 md:h-1/2 h-3/4 justify-center rounded shadow-xl"
-      id="drum-machine"
-    >
-      <DrumPad
-        trigger="Q"
-        clip="https://s3.amazonaws.com/freecodecamp/drums/Chord_1.mp3"
-      />
-      <DrumPad
-        trigger="W"
-        clip="https://s3.amazonaws.com/freecodecamp/drums/Chord_2.mp3"
-      />
-      <DrumPad
-        trigger="E"
-        clip="https://s3.amazonaws.com/freecodecamp/drums/Chord_3.mp3"
-      />
-      <h2
-        value={displayText}
-        id="display"
-        className="text-2xl text-bold text-center col-span-2 row-span-3"
-      >
-        {displayText}
-      </h2>
-      <DrumPad
-        trigger="A"
-        clip="https://s3.amazonaws.com/freecodecamp/drums/Give_us_a_light.mp3"
-      />
-      <DrumPad
-        trigger="S"
-        clip="https://s3.amazonaws.com/freecodecamp/drums/Dry_Ohh.mp3"
-      />
-      <DrumPad
-        trigger="D"
-        clip="https://s3.amazonaws.com/freecodecamp/drums/Bld_H1.mp3"
-      />
-      <DrumPad
-        trigger="Z"
-        clip="https://s3.amazonaws.com/freecodecamp/drums/punchy_kick_1.mp3"
-      />
-      <DrumPad
-        trigger="X"
-        clip="https://s3.amazonaws.com/freecodecamp/drums/side_stick_1.mp3"
-      />
-      <DrumPad
-        trigger="C"
-        clip="https://s3.amazonaws.com/freecodecamp/drums/Brk_Snr.mp3"
-      />
+    <div>
+      <Link href="../" passHref>
+        <a><h2>Back</h2></a>
+      </Link>
+      <hr />
+      <header> <h1>Drum Machine</h1></header>
+      <div id={styles.drumBG}>
+      <div id={styles.drumBox}>
+        <h2>Drum Machine Keys</h2>
+        <div className="column"
+          id={styles.drumMachine}>
+          <div > <DrumPad
+            trigger="Q"
+            clip="https://s3.amazonaws.com/freecodecamp/drums/Chord_1.mp3"
+          /></div>
+          <DrumPad
+            trigger="W"
+            clip="https://s3.amazonaws.com/freecodecamp/drums/Chord_2.mp3"
+          />
+          <DrumPad
+            trigger="E"
+            clip="https://s3.amazonaws.com/freecodecamp/drums/Chord_3.mp3"
+          />
+
+          <DrumPad
+            trigger="A"
+            clip="https://s3.amazonaws.com/freecodecamp/drums/Give_us_a_light.mp3"
+          />
+          <DrumPad
+            trigger="S"
+            clip="https://s3.amazonaws.com/freecodecamp/drums/Dry_Ohh.mp3"
+          />
+          <DrumPad
+            trigger="D"
+            clip="https://s3.amazonaws.com/freecodecamp/drums/Bld_H1.mp3"
+          />
+          <DrumPad
+            trigger="Z"
+            clip="https://s3.amazonaws.com/freecodecamp/drums/punchy_kick_1.mp3"
+          />
+          <DrumPad
+            trigger="X"
+            clip="https://s3.amazonaws.com/freecodecamp/drums/side_stick_1.mp3"
+          />
+          <DrumPad
+            trigger="C"
+            clip="https://s3.amazonaws.com/freecodecamp/drums/Brk_Snr.mp3"
+          />
+        </div>
+       
+        <div>      <h2
+          value={displayText}
+          id={styles.drumDisplay}
+          className="text-2xl text-bold text-center col-span-2 row-span-3"
+        >
+          {displayText}
+        </h2></div>
+        </div>
+      </div>
+      <footer><a href="https://github.com/Danieda/Fcc-FrontEnd-React-Redux-Certificate"><h3>View Source</h3></a></footer>
     </div>
+
   );
 }
 

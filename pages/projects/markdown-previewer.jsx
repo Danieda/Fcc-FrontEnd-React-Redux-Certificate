@@ -4,7 +4,7 @@ import { createStore } from 'redux'
 import { connect } from 'react-redux'
 import Link from 'next/link'
 import styles from '../../styles/markdown.module.css'
-
+import {marked} from 'marked'
 
 const ADD = 'ADD'
 
@@ -59,13 +59,13 @@ class Structure extends React.Component {
           <header> <h1>Markdown Previewer</h1></header>
 
         </div>
-
+      
         <div className='column' id={styles.holder}>
           <textarea type="text" value={inputtext} id={styles.InputBox} className="row" />
           <div className="row" id={styles.InputResult}>{this.props.value}</div>
         
         </div>
-        <div  className="html-editor__content" dangerouslySetInnerHTML={{__html:this.markup().__html}}></div>
+        <div id={styles.markdownpreview} dangerouslySetInnerHTML={{__html:marked(inputtext)}}></div>
         <footer><a href="https://github.com/Danieda/Fcc-FrontEnd-React-Redux-Certificate"><h3>View Source</h3></a></footer>
       </div>
     )
