@@ -70,13 +70,4 @@ class Pomodoro extends React.Component{
 
 
 
-class pomodoroWrapper extends React.Component {
-    render() {
-      return (
-        <Provider store={store}>
-          <Container />
-        </Provider>
-      )
-    }
-  }
   export default  Pomodoro
