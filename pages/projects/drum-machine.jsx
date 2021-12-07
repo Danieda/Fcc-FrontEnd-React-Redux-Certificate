@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+/*import { useEffect } from "react";
 import { useSelector, useDispatch, Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
@@ -107,7 +107,7 @@ function DrumMachine() {
         </div>
        
         <div>      <h2
-          value={displayText}
+         
           id={styles.drumDisplay}
           className="text-2xl text-bold text-center col-span-2 row-span-3"
         >
@@ -127,4 +127,4 @@ export default function Drum() {
       <DrumMachine />
     </Provider>
   );
-}
+}*/

@@ -37,7 +37,6 @@ const messageReducer = (state = initialState.defaultQuote, action) => {
 }
 
 
-
 const store = createStore(messageReducer)
 
 class Structure extends React.Component {
@@ -67,20 +66,18 @@ class Structure extends React.Component {
 
               <p>{this.props.quote}</p>
               <p>{this.props.name}</p>
-
             </div>
             <button id={styles.drumButton} onClick={this.props.handle} id={styles.button}>Get a Quote!</button>
             <p><a href="https://twitter.com/?lang=en" id={styles.tweet}>Tweet this quote!</a></p>
           </div>
-
         </div>
-
         <footer><a href="https://github.com/Danieda/Fcc-FrontEnd-React-Redux-Certificate"><h3>View Source</h3></a></footer>
       </div>
 
     )
   }
 }
+
 class QuoteMachine extends React.Component {
   constructor(props) {
     super(props)
