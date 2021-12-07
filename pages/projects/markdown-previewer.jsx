@@ -36,15 +36,17 @@ const InputReducer = (state = defaultState.default, action) => {
       }
   }
 }
-
+const store = createStore(InputReducer)
 class Structure extends React.Component {
   constructor(props) {
     super(props)
-
+    this.state = {
+      value: this.props.value
+    }
   }
   markup(){
     return {
-      __html: this.props.value
+      __html: this.state.value
     }
   }
   render() {
@@ -61,11 +63,13 @@ class Structure extends React.Component {
         </div>
       
         <div className='column' id={styles.holder}>
-          <textarea type="text" value={inputtext} id={styles.InputBox} className="row" />
-          <div className="row" id={styles.InputResult}>{this.props.value}</div>
-        
+          <textarea value={this.props.value} onChange={this.props.handle} id={styles.InputBox} className="row" />
+     
+          <div id="nothing">
+            <div id={styles.InputResult} dangerouslySetInnerHTML={{__html:marked(this.props.value)}}/>
+          </div>
         </div>
-        <div id={styles.markdownpreview} dangerouslySetInnerHTML={{__html:marked(inputtext)}}></div>
+       
         <footer><a href="https://github.com/Danieda/Fcc-FrontEnd-React-Redux-Certificate"><h3>View Source</h3></a></footer>
       </div>
     )
@@ -78,10 +82,11 @@ class MarkdownPreviewer extends React.Component {
     this.state = {
       value: inputtext
     }
+    this.inputHandler = this.inputHandler.bind(this)
   }
 
   inputHandler(events) {
-    this.props.AddInput(value)
+   //this.props.AddInput(this.state.value)
     this.setState({
       value: events.target.value
     
@@ -92,7 +97,7 @@ class MarkdownPreviewer extends React.Component {
   render() {
     return (
       <div>
-        <Structure value={this.state.value} />
+        <Structure value={this.state.value} handle={this.inputHandler} />
       </div>
     )
   }
@@ -112,7 +117,7 @@ const mapDispatchToProps = (dispatch) => {
   }
 
 }
-const store = createStore(InputReducer)
+
 const Container = connect(mapStateToProps, mapDispatchToProps)(MarkdownPreviewer)
 
 

@@ -23,7 +23,7 @@ export default function Home() {
         <img src="/Quote.png" className={styles.box1} alt="QuoteBox"/>
         </Link>
         <Link href="/projects/markdown-previewer" passHref>
-        <img src="/Quote.png" className={styles.box2} alt="markdown-previewer"/>
+        <img src="/markdown.png" className={styles.box2} alt="markdown-previewer"/>
         </Link>
         <Link href="/projects/drum-machine" passHref>
         <img src="/drum.png" className={styles.box3} alt="drum-machine"/>
