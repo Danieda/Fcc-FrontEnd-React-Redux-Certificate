@@ -67,7 +67,7 @@ class Structure extends React.Component {
               <p>{this.props.quote}</p>
               <p>{this.props.name}</p>
             </div>
-            <button id={styles.drumButton} onClick={this.props.handle} id={styles.button}>Get a Quote!</button>
+            <button id={styles.drumButton} onClick={this.props.handle} className={styles.button}>Get a Quote!</button>
             <p><a href="https://twitter.com/?lang=en" id={styles.tweet}>Tweet this quote!</a></p>
           </div>
         </div>
