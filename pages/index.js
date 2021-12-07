@@ -31,7 +31,9 @@ export default function Home() {
         <Link href="/projects/calculator" passHref>
         <img src="/Calc.png" className={styles.box4} alt="calculator"/>
         </Link>
-        <div className={styles.box5} >box5</div>
+        <Link href="/projects/pomodoro" passHref>
+        <img src="/favicon.ico" className={styles.box5} alt="pomodoro"/>
+        </Link>
  
       </main>
       <div className={styles.grid}>
