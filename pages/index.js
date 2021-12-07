@@ -32,7 +32,7 @@ export default function Home() {
         <img src="/Calc.png" className={styles.box4} alt="calculator"/>
         </Link>
         <Link href="/projects/pomodoro" passHref>
-        <img src="/favicon.ico" className={styles.box5} alt="pomodoro"/>
+        <img src="/pom.png" className={styles.box5} alt="pomodoro"/>
         </Link>
  
       </main>

@@ -63,7 +63,7 @@ class Structure extends React.Component {
         </div>
       
         <div className='column' id={styles.holder}>
-          <textarea className="text .comment_box" value={this.props.value} onChange={this.props.handle} id={styles.InputBox} className="row" />
+          <textarea className="text .comment_box" value={this.props.value} onChange={this.props.handle} id={styles.InputBox} />
      
           <div id="nothing">
             <div id={styles.InputResult} dangerouslySetInnerHTML={{__html:marked(this.props.value)}}/>
