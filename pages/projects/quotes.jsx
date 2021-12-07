@@ -1,4 +1,4 @@
-/*import React from "react"
+import React from "react"
 import { Provider } from "react-redux";
 import { createStore } from 'redux'
 import { connect } from 'react-redux'
@@ -153,4 +153,4 @@ class QuoteWrapper extends React.Component {
     )
   }
 }
-export default  QuoteWrapper*/
+export default  QuoteWrapper

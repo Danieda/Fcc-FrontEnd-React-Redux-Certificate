@@ -1,4 +1,4 @@
-/*import React from "react"
+import React from "react"
 import { Provider } from "react-redux";
 import { createStore } from 'redux'
 import { connect } from 'react-redux'
@@ -171,4 +171,3 @@ And here. | Okay. | I think we get it.
 ![freeCodeCamp Logo](https://cdn.freecodecamp.org/testable-projects-fcc/images/fcc_secondary.svg)
 `;
 export default AppWrapper
-*/
