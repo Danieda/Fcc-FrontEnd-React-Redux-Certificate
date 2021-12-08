@@ -3,7 +3,7 @@
     background-size: cover;
     display: flex;
     width: 100%;
-    height: 100vh;
+    height: 1920px;
     align-items: center;
     justify-content: center;
 }
@@ -15,8 +15,8 @@
  display: flex;
  justify-content: center;
  align-items: center;
- width: 40vh;
- height: 30vh;
+ width: 500px;
+ height: 400px;
 
 }
 #container{
@@ -24,12 +24,12 @@
 
 }
 #stem{
-height: 40vhpx;
-width: 30vh;
+height: 300px;
+width: 300px;
 position: relative;
 display: flex;
-left: 400px;
-bottom: 230px;
+left: 370px;
+bottom: 300px;
 }
 #stemGrid{
 
