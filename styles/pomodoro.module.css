@@ -31,6 +31,21 @@ display: flex;
 left: 370px;
 bottom: 300px;
 }
-#stemGrid{
-
+#buttonGrid{
+display: grid;
+grid-template-columns: 1fr 1fr;
+grid-gap: 40px;
 }
+#buttonStyle{
+    height: 80px;
+    width: 50px;
+    border-radius: 50px;
+    background: orangered;
+    border: 10px solid brown;
+    color:white;
+    font-size: 30px;
+}
+#buttonStyle:hover{
+    background: orange;
+}
+
