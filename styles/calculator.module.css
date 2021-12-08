@@ -1,10 +1,13 @@
 #calcMain{
     background-image: url('/wood.jpg');
-    height: 100vh;
+    background-size: cover;
     position: relative;
     justify-content: center;
     align-items: center;
     display: flex;
+    height: 2560px;
+    
+
 }
 
 #calcBox{
@@ -26,6 +29,8 @@
     grid-gap: 10px;
     background: #1a1a1a;
     border-radius: 20px;
+    max-height: 100%;
+    max-width: 100%;
 
 }
 #zero{

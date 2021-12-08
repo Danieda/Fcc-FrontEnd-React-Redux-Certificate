@@ -23,19 +23,19 @@ class Structure extends React.Component{
           
           <div id={styles.result}>....</div>
           <button id={styles.AC}><h2>AC</h2></button>
-          <button><h2>/</h2></button>
-          <button><h2>*</h2></button>
-          <button><h2>7</h2></button>
-          <button><h2>8</h2></button>
-          <button><h2>9</h2></button>
-          <button><h2>-</h2></button>
-          <button><h2>4</h2></button>
-          <button><h2>5</h2></button>
-          <button><h2>6</h2></button>
-          <button><h2>+</h2></button>
-          <button><h2>1</h2></button>
-          <button><h2>2</h2></button>
-          <button><h2>3</h2></button>
+          <button><h2 id={styles.num}>/</h2></button>
+          <button><h2 id={styles.num}>*</h2></button>
+          <button><h2 id={styles.num}>7</h2></button>
+          <button><h2 id={styles.num}>8</h2></button>
+          <button><h2 id={styles.num}>9</h2></button>
+          <button><h2 id={styles.num}>-</h2></button>
+          <button><h2 id={styles.num}>4</h2></button>
+          <button><h2 id={styles.num}>5</h2></button>
+          <button><h2 id={styles.num}>6</h2></button>
+          <button><h2 id={styles.num}>+</h2></button>
+          <button><h2 id={styles.num}>1</h2></button>
+          <button><h2 id={styles.num}>2</h2></button>
+          <button><h2 id={styles.num}>3</h2></button>
           <button id={styles.zero}><h2>0</h2></button>
           <button><h2>.</h2></button>
           <button id ={styles.equals}><h2>=</h2></button>
