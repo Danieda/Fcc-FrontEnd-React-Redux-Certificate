@@ -89,7 +89,7 @@ class Structure extends React.Component{
               <div><h3>SESSION</h3><p><h2>{this.props.timer}:{seconds}</h2></p></div>
               <button>Start/Stop</button>
               <button onClick={this.props.reset}>Reset</button>
-              <button>Fast Forward</button>
+              <button onClick={this.props.fastForward}>Fast Forward</button>
             </div>
             </div>
       
@@ -119,7 +119,7 @@ class Pomodoro extends React.Component{
     super(props)
     this.state = {
       timer: 10,
-      breakTime: 0
+      breakTime: 5
     }
     this.handleAddCount = this.handleAddCount.bind(this)
     this.handleRemoveCount = this.handleRemoveCount.bind(this)
@@ -169,8 +169,8 @@ handleFastForward(){
         <div>
         <Structure breakTime={this.state.breakTime} timer={this.state.timer} handleCount={this.handleAddCount}
          handleRemoveCount={this.handleRemoveCount} breakAdd={this.handleBreakAdd}
-         breakRemove={this.handleBreakRemove} reset={this.handleReset} />
-        <button id={styles.buttonStyle} onClick={this.handleAddCount} value={1}>-</button>
+         breakRemove={this.handleBreakRemove} reset={this.handleReset} fastForward={this.handleFastForward}/>
+     
         {this.state.timer}
         </div>
     )
