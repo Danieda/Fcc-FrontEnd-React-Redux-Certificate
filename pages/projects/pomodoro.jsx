@@ -19,13 +19,14 @@ let finishedTime
 let timerInterval
 
 
-  const addSession = (status) => {
+  const addStatus = (status) => {
     return{
-      type: SESSION_MODE,
+      type: status,
       status:status
 
     }
   }
+  //may not be used
   const addBreak = (status) => {
     return{
       type: BREAK_MODE,
@@ -34,7 +35,7 @@ let timerInterval
   }
 
 const intitialState = {
-default: 0
+default: SESSION_MODE
 }
 
 
@@ -42,17 +43,35 @@ const timerReducer = (state = current_mode, action) => {
 switch(action.type)
 {
   case SESSION_MODE:{
-return("DECREAS TIME")
+return(state = SESSION_MODE)
   }
   case BREAK_MODE:{
-      return("STOP!")
+      return(state = BREAK_MODE)
   }
+  default:{
+    return(state = intitialState.default)
+    
+  }
+}
+}
 
-}
-}
 
 
 const store = createStore(timerReducer)
+
+const mode = (timer, breaktime, state) => {
+  if(state == SESSION_MODE && timer == breaktime)
+  {
+    return current_mode = BREAK_MODE
+  }
+  else if(state == BREAK_MODE)
+  {
+   return current_mode = SESSION_MODE
+  }
+  else{
+    return current_mode = SESSION_MODE
+  }
+}
 
 class Structure extends React.Component{
   constructor(props){
@@ -86,8 +105,8 @@ class Structure extends React.Component{
               <button id={styles.buttonStyle} onClick={this.props.handleCount}>+</button></p>
               </div>
               </div>
-              <div><h3>SESSION</h3><p><h2>{this.props.timer}:{seconds}</h2></p></div>
-              <button>Start/Stop</button>
+              <div><h3>{this.props.status}</h3><p><h2>{this.props.timer}:{seconds}</h2></p></div>
+              <button onClick={this.props.session}>Start/Stop</button>
               <button onClick={this.props.reset}>Reset</button>
               <button onClick={this.props.fastForward}>Fast Forward</button>
             </div>
@@ -109,9 +128,8 @@ const check = (timer) => {
 else{
   return timer;
 }
-return timer;
-}
 
+}
 
 
 class Pomodoro extends React.Component{
@@ -127,6 +145,11 @@ class Pomodoro extends React.Component{
     this.handleBreakRemove = this.handleBreakRemove.bind(this)
     this.handleReset = this.handleReset.bind(this)
     this.handleFastForward = this.handleFastForward.bind(this)
+    this.handleStatusChange = this.handleStatusChange.bind(this)
+  }
+  handleStatusChange() {
+   this.props.submitNewStatus(mode(this.state.timer, this.state.breakTime, this.props.status))
+  
   }
 
   handleAddCount() {
@@ -138,6 +161,7 @@ class Pomodoro extends React.Component{
     this.setState({
     
       timer: check(this.state.timer -1)
+     
     })
   }
  handleBreakAdd(){
@@ -161,7 +185,7 @@ handleFastForward(){
     //must have a stop session maybe redux.
   })
 }
- handle
+
 
   render(){
   
@@ -169,9 +193,10 @@ handleFastForward(){
         <div>
         <Structure breakTime={this.state.breakTime} timer={this.state.timer} handleCount={this.handleAddCount}
          handleRemoveCount={this.handleRemoveCount} breakAdd={this.handleBreakAdd}
-         breakRemove={this.handleBreakRemove} reset={this.handleReset} fastForward={this.handleFastForward}/>
-     
-        {this.state.timer}
+         breakRemove={this.handleBreakRemove} reset={this.handleReset} fastForward={this.handleFastForward}
+         session={this.handleStatusChange} status={this.props.status}/>
+       
+    
         </div>
     )
   }
@@ -184,7 +209,7 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchStatusToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch) => {
 return{
   submitNewStatus: (newStatus) => {
     dispatch(addStatus(newStatus))
@@ -196,7 +221,7 @@ return{
 
 
 
-const Container = connect(mapStateToProps, mapDispatchStatusToProps)(Pomodoro);
+const Container = connect(mapStateToProps, mapDispatchToProps)(Pomodoro);
 
 class PomodoroWrapper extends React.Component{
   render(){
