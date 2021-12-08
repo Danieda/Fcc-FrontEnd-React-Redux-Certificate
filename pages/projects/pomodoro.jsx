@@ -121,11 +121,11 @@ class Structure extends React.Component{
 
 const check = (timer) => {
         
-  if(timer < 0 )
+if(timer <= 0 )
 {
-  timer = 0
+ return timer = 0
 }
-else{
+else {
   return timer;
 }
 
@@ -160,7 +160,7 @@ class Pomodoro extends React.Component{
   handleRemoveCount() {
     this.setState({
     
-      timer: check(this.state.timer -1)
+      timer: check(this.state.timer - 1)
      
     })
   }
@@ -195,7 +195,7 @@ handleFastForward(){
          handleRemoveCount={this.handleRemoveCount} breakAdd={this.handleBreakAdd}
          breakRemove={this.handleBreakRemove} reset={this.handleReset} fastForward={this.handleFastForward}
          session={this.handleStatusChange} status={this.props.status}/>
-       
+         {this.state.timer}
     
         </div>
     )
