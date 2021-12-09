@@ -57,7 +57,7 @@ return(
 const store = createStore(timerReducer)
 
 
-function checkStatus(current_mode, time, play, sessEnd)
+function checkStatus(current_mode, time, play, sessEnd, breaks)
 {
   if(sessEnd == "true"){
     return time = "--"
@@ -65,18 +65,18 @@ function checkStatus(current_mode, time, play, sessEnd)
   if(sessEnd == "false"){
   if(current_mode == SESSION_MODE)
   {
-    timer(time, "Continue", play)
+    timer(time, "Continue", play, breaks)
   }
   }
   else if(current_mode == BREAK_MODE ){
 
 
-    timer(time, "Break", play)
+    timer(time, "Break", play, breaks)
 
   }
  
   else if(play == "pause"){
-    timer(time, play)
+    timer(time, "Continue", play, breaks)
   }
   
  
@@ -87,7 +87,7 @@ function checkStatus(current_mode, time, play, sessEnd)
 
 
 
-function timer(time, timeStop, play){
+function timer(time, timeStop, play, breaks){
   var sec = 0;
   var storedSeconds = 20
   var storedTime = 10
@@ -103,12 +103,12 @@ if(play != "pause"){
       sec--;
       
       if (sec < 0 && time > 0) {
-        sec = 59;
+        sec = 5;
         time -= 1;
          
       }
       
-      if( play == "pause"){
+      if(breaks == time && sec <= 0){
         clearInterval(timer);  
        
      }
@@ -168,7 +168,7 @@ class Structure extends React.Component{
               <button id={styles.buttonStyle} onClick={this.props.handleCount}>+</button></p>
               </div>
               </div>
-              <div><h3>{this.props.status}</h3><p><h2 id="minutes">{checkStatus(this.props.status, this.props.timer, this.props.play, this.props.sessionEnd)}<label id="seconds">:--</label></h2></p></div>
+              <div><h3>{this.props.status}</h3><p><h2 id="minutes">{checkStatus(this.props.status, this.props.timer, this.props.play, this.props.sessionEnd, this.props.breakTime)}<label id="seconds">:--</label></h2></p></div>
               <button onClick={this.props.session}>Start/Stop</button>
               <button onClick={this.props.reset}>Reset</button>
               <button onClick={this.props.fastForward}>Fast Forward</button>
