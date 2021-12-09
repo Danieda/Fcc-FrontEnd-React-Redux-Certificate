@@ -11,6 +11,7 @@ import Link from 'next/link'
 const SESSION_MODE = 'SESSION'
 const BREAK_MODE = 'BREAK'
 
+let currTime = ''
 let minutes = '25'
 let seconds = '00'
 let current_mode = SESSION_MODE
@@ -19,18 +20,12 @@ let finishedTime
 let timerInterval
 
 
-  const addStatus = (status) => {
+  const addStatus = (status, time) => {
     return{
       type: status,
-      status:status
+      status:status,
+      time: time
 
-    }
-  }
-  //may not be used
-  const addBreak = (status) => {
-    return{
-      type: BREAK_MODE,
-      status: status
     }
   }
 
@@ -43,7 +38,11 @@ const timerReducer = (state = current_mode, action) => {
 switch(action.type)
 {
   case SESSION_MODE:{
-return(state = SESSION_MODE)
+return(
+  state = SESSION_MODE
+ 
+  )
+ 
   }
   case BREAK_MODE:{
       return(state = BREAK_MODE)
@@ -55,9 +54,71 @@ return(state = SESSION_MODE)
 }
 }
 
-
-
 const store = createStore(timerReducer)
+
+
+function checkStatus(current_mode, time, play, sessEnd)
+{
+  if(sessEnd == "true"){
+    return time = "--"
+  }
+  if(sessEnd == "false"){
+  if(current_mode == SESSION_MODE)
+  {
+    timer(time, "Continue", play)
+  }
+  }
+  else if(current_mode == BREAK_MODE ){
+
+
+    timer(time, "Break", play)
+
+  }
+ 
+  else if(play == "pause"){
+    timer(time, play)
+  }
+  
+ 
+ 
+
+}
+
+
+
+
+function timer(time, timeStop, play){
+  var sec = 0;
+  var storedSeconds = 20
+  var storedTime = 10
+  var storage;
+
+if(play != "pause"){
+  
+}
+    var timer = setInterval(function(){
+      
+      document.getElementById('seconds').innerHTML= time +':'+sec;
+      
+      sec--;
+      
+      if (sec < 0 && time > 0) {
+        sec = 59;
+        time -= 1;
+         
+      }
+      
+      if( play == "pause"){
+        clearInterval(timer);  
+       
+     }
+   
+  }, 1000);
+  
+ 
+  }
+
+
 
 const mode = (timer, breaktime, state) => {
   if(state == SESSION_MODE && timer == breaktime)
@@ -72,6 +133,8 @@ const mode = (timer, breaktime, state) => {
     return current_mode = SESSION_MODE
   }
 }
+
+
 
 class Structure extends React.Component{
   constructor(props){
@@ -105,13 +168,16 @@ class Structure extends React.Component{
               <button id={styles.buttonStyle} onClick={this.props.handleCount}>+</button></p>
               </div>
               </div>
-              <div><h3>{this.props.status}</h3><p><h2>{this.props.timer}:{seconds}</h2></p></div>
+              <div><h3>{this.props.status}</h3><p><h2 id="minutes">{checkStatus(this.props.status, this.props.timer, this.props.play, this.props.sessionEnd)}<label id="seconds">:--</label></h2></p></div>
               <button onClick={this.props.session}>Start/Stop</button>
               <button onClick={this.props.reset}>Reset</button>
               <button onClick={this.props.fastForward}>Fast Forward</button>
+              
+              
+        
             </div>
             </div>
-      
+            
           </div>
           <footer><a href="https://github.com/Danieda/Fcc-FrontEnd-React-Redux-Certificate"><h3>View Source</h3></a></footer>
       </div>
@@ -120,7 +186,11 @@ class Structure extends React.Component{
 }
 
 const check = (timer) => {
-        
+
+  if(timer >= 60)
+  {
+    return timer = 60
+  }
 if(timer <= 0 )
 {
  return timer = 0
@@ -131,13 +201,20 @@ else {
 
 }
 
-
+const playStatus = (play) => {
+ return play == "pause" ? play = "start" : play = "pause"
+}
+const oneSession = (sess, timer, play) => {
+  return sess == "true" && timer > 0 && play == "start" ? sess = "true" : sess = "false"
+}
 class Pomodoro extends React.Component{
   constructor(props){
     super(props)
     this.state = {
       timer: 10,
-      breakTime: 5
+      breakTime: 5,
+      play: "pause",
+      sessionEnd: "true"
     }
     this.handleAddCount = this.handleAddCount.bind(this)
     this.handleRemoveCount = this.handleRemoveCount.bind(this)
@@ -148,8 +225,11 @@ class Pomodoro extends React.Component{
     this.handleStatusChange = this.handleStatusChange.bind(this)
   }
   handleStatusChange() {
-   this.props.submitNewStatus(mode(this.state.timer, this.state.breakTime, this.props.status))
-  
+   this.props.submitNewStatus(mode(this.state.timer, this.state.breakTime, this.props.status), this.state.timer)
+  this.setState({
+    play: playStatus(this.state.play),
+    sessionEnd: oneSession(this.state.sessionEnd, this.state.timer, this.state.play)
+  })
   }
 
   handleAddCount() {
@@ -161,7 +241,7 @@ class Pomodoro extends React.Component{
     this.setState({
     
       timer: check(this.state.timer - 1)
-     
+      
     })
   }
  handleBreakAdd(){
@@ -182,7 +262,6 @@ handleReset(){
 handleFastForward(){
   this.setState({
     timer: this.state.breakTime
-    //must have a stop session maybe redux.
   })
 }
 
@@ -194,9 +273,10 @@ handleFastForward(){
         <Structure breakTime={this.state.breakTime} timer={this.state.timer} handleCount={this.handleAddCount}
          handleRemoveCount={this.handleRemoveCount} breakAdd={this.handleBreakAdd}
          breakRemove={this.handleBreakRemove} reset={this.handleReset} fastForward={this.handleFastForward}
-         session={this.handleStatusChange} status={this.props.status}/>
+         session={this.handleStatusChange} status={this.props.status} play={this.state.play} sessionEnd={this.state.sessionEnd}/>
          {this.state.timer}
-    
+          {this.state.play}
+          {this.state.sessionEnd}
         </div>
     )
   }
@@ -211,8 +291,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 return{
-  submitNewStatus: (newStatus) => {
-    dispatch(addStatus(newStatus))
+  submitNewStatus: (newStatus, time) => {
+    dispatch(addStatus(newStatus, time))
 }
 }
 
