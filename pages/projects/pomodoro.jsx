@@ -103,7 +103,7 @@ if(play != "pause"){
       sec--;
       
       if (sec < 0 && time > 0) {
-        sec = 5;
+        sec = 59;
         time -= 1;
          
       }
