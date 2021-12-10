@@ -208,13 +208,13 @@ class Pomodoro extends React.Component {
     this.setState({
       timer: 10,
       breakTime: 5,
-      play: this.state.play = "reset"
+      play:  "reset"
     })
   }
   handleFastForward() {
     this.setState({
       timer: this.state.breakTime,
-      play: this.state.play = "FastForward"
+      play: "FastForward"
 
     })
   }
