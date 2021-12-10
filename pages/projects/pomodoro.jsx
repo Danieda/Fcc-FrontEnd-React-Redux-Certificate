@@ -38,7 +38,7 @@ const timerReducer = (state = current_mode, action) => {
 switch(action.type)
 {
   case SESSION_MODE:{
-    if(action.playStatus == "start")
+    if(action.playStatus == "pause")
     {
       return( 
  
@@ -46,9 +46,15 @@ switch(action.type)
    state = SESSION_MODE
         )
     }
-    else{
+    else if(action.playStatus == "start"){
       return(clearInterval(clearInt),
       state = SESSION_MODE)
+    }
+    else if(action.play =="reset"){
+      return(
+        clearInt(clearInt),
+        state = SESSION_MODE
+      )
     }
 }
 
@@ -67,7 +73,7 @@ const store = createStore(timerReducer)
 
 function checkStatus(current_mode, time, play, sessEnd, breaks)
 {
-  if(sessEnd == "true"){
+  if(sessEnd == "true" && play == "pause"){
     return time = "--"
   }
   if(sessEnd == "false"){
@@ -208,7 +214,7 @@ else {
 }
 
 const playStatus = (play) => {
- return play == "pause" || play == "reset" ? play = "start" : play = "pause" 
+ return play == "pause" ? play = "start" : play = "pause" 
 }
 const oneSession = (sess, timer, play) => {
   return sess == "true" && timer > 0 && play == "start" ? sess = "true" : sess = "false"
@@ -219,7 +225,7 @@ class Pomodoro extends React.Component{
     this.state = {
       timer: 10,
       breakTime: 5,
-      play: "start",
+      play: "pause",
       sessionEnd: "true"
     }
     this.handleAddCount = this.handleAddCount.bind(this)
@@ -263,7 +269,7 @@ class Pomodoro extends React.Component{
 handleReset(){
   this.setState({
     timer: 10,
-    play: "reset"
+    play: this.state.play = "reset"
   })
 }
 handleFastForward(){
