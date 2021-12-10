@@ -77,17 +77,16 @@ function checkStatus(current_mode, time, play, sessEnd, breaks) {
 
 function Intervals( _breaktime) {
 
-  var _storedSec = storedSeconds
+ 
   var intTimer = setInterval(function () {
-    if(storedTime == _breaktime && _storedSec === 0)
+    if(storedTime == _breaktime && storedTime === 0)
     {
-     
       clearInterval(intTimer)
     }
-    document.getElementById('minutes').innerHTML = storedTime + ':' + _storedSec;
-    _storedSec--;
-if (_storedSec < 0 && storedTime > 1) {
-      _storedSec = 59
+    document.getElementById('minutes').innerHTML = storedTime + ':' + storedSeconds;
+    storedSeconds--;
+if (storedSeconds < 0 && storedTime > 1) {
+      storedSeconds = 59
       storedTime -= 1;
     }
   }, 1000);
