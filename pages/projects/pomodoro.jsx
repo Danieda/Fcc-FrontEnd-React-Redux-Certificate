@@ -20,12 +20,12 @@ let finishedTime
 let timerInterval
 
 
-  const addStatus = (status, time) => {
+  const addStatus = (status, time, playStatus) => {
     return{
       type: status,
       status:status,
-      time: time
-
+      time: time,
+      playStatus: playStatus
     }
   }
 
@@ -38,17 +38,25 @@ const timerReducer = (state = current_mode, action) => {
 switch(action.type)
 {
   case SESSION_MODE:{
-return(
-  state = SESSION_MODE
+    if(action.playStatus == "start")
+    {
+      return( 
  
-  )
- 
-  }
+   Intervals(action.time, action.status, action.playStatus, action.status),
+   state = SESSION_MODE
+        )
+    }
+    else{
+      return(clearInterval(clearInt),
+      state = SESSION_MODE)
+    }
+}
+
   case BREAK_MODE:{
       return(state = BREAK_MODE)
   }
   default:{
-    return(state = intitialState.default)
+    return(state)
     
   }
 }
@@ -65,18 +73,18 @@ function checkStatus(current_mode, time, play, sessEnd, breaks)
   if(sessEnd == "false"){
   if(current_mode == SESSION_MODE)
   {
-    timer(time, "Continue", play, breaks)
+
   }
   }
   else if(current_mode == BREAK_MODE ){
 
 
-    timer(time, "Break", play, breaks)
+
 
   }
  
   else if(play == "pause"){
-    timer(time, "Continue", play, breaks)
+   
   }
   
  
@@ -85,18 +93,16 @@ function checkStatus(current_mode, time, play, sessEnd, breaks)
 }
 
 
+var clearInt;
 
-
-function timer(time, timeStop, play, breaks){
+function Intervals(time, timeStop, play, breaks){
   var sec = 0;
   var storedSeconds = 20
   var storedTime = 10
   var storage;
 
-if(play != "pause"){
-  
-}
-    var timer = setInterval(function(){
+
+    var intTimer = setInterval(function(){
       
       document.getElementById('seconds').innerHTML= time +':'+sec;
       
@@ -109,13 +115,13 @@ if(play != "pause"){
       }
       
       if(breaks == time && sec <= 0){
-        clearInterval(timer);  
+        clearInterval(intTimer);  
        
      }
    
   }, 1000);
   
- 
+ clearInt = intTimer;
   }
 
 
@@ -202,7 +208,7 @@ else {
 }
 
 const playStatus = (play) => {
- return play == "pause" ? play = "start" : play = "pause"
+ return play == "pause" || play == "reset" ? play = "start" : play = "pause" 
 }
 const oneSession = (sess, timer, play) => {
   return sess == "true" && timer > 0 && play == "start" ? sess = "true" : sess = "false"
@@ -213,7 +219,7 @@ class Pomodoro extends React.Component{
     this.state = {
       timer: 10,
       breakTime: 5,
-      play: "pause",
+      play: "start",
       sessionEnd: "true"
     }
     this.handleAddCount = this.handleAddCount.bind(this)
@@ -225,7 +231,7 @@ class Pomodoro extends React.Component{
     this.handleStatusChange = this.handleStatusChange.bind(this)
   }
   handleStatusChange() {
-   this.props.submitNewStatus(mode(this.state.timer, this.state.breakTime, this.props.status), this.state.timer)
+   this.props.submitNewStatus(mode(this.state.timer, this.state.breakTime, this.props.status), this.state.timer, this.state.play)
   this.setState({
     play: playStatus(this.state.play),
     sessionEnd: oneSession(this.state.sessionEnd, this.state.timer, this.state.play)
@@ -256,7 +262,8 @@ class Pomodoro extends React.Component{
  }
 handleReset(){
   this.setState({
-    timer: 10
+    timer: 10,
+    play: "reset"
   })
 }
 handleFastForward(){
@@ -291,8 +298,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 return{
-  submitNewStatus: (newStatus, time) => {
-    dispatch(addStatus(newStatus, time))
+  submitNewStatus: (newStatus, time, playStatus) => {
+    dispatch(addStatus(newStatus, time, playStatus))
 }
 }
 

@@ -21,7 +21,7 @@ class Structure extends React.Component{
           <div id={styles.calcBox}>
             <div id={styles.container} className="columns">
           
-          <div id={styles.result}>....</div>
+          <div id={styles.result}>Work in Progress</div>
           <button id={styles.AC}><h2>AC</h2></button>
           <button><h2 id={styles.num}>/</h2></button>
           <button><h2 id={styles.num}>*</h2></button>
