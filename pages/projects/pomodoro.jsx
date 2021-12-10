@@ -26,30 +26,23 @@ const addStatus = (status, time, playStatus) => {
 }
 
 const timerReducer = (state = current_mode, action) => {
-
   switch (action.type) {
     case SESSION_MODE: {
       if (action.playStatus == "pause") {
         return (
           clearInterval(clearInt),
-
           Intervals(action.time),
-
           state = SESSION_MODE
         )
       }
       else if (action.playStatus == "start") {
         return (clearInterval(clearInt),
-
           state = SESSION_MODE)
       }
     }
-
     case BREAK_MODE: {
-
       return (state = BREAK_MODE)
     }
-
     default: {
       return (state = SESSION_MODE)
     }
@@ -64,13 +57,8 @@ function checkStatus(current_mode, time, play, sessEnd, breaks) {
   if (sessEnd == "true" && play == "pause") {
     return time = "--"
   }
-
   if (current_mode == SESSION_MODE) {
-
   }
-
-
-
   if (play == "reset") {
 
     clearInterval(clearInt)
@@ -82,8 +70,7 @@ function checkStatus(current_mode, time, play, sessEnd, breaks) {
     clearInterval(clearInt)
     storedTime = breaks
     storedSeconds = 0
-    document.getElementById('minutes').innerHTML =  breaks + ":" + 0
-   
+    document.getElementById('minutes').innerHTML = breaks + ":" + 0
   }
 }
 
@@ -91,40 +78,27 @@ var clearInt;
 
 function Intervals(time) {
 
-
   var _storedSec = storedSeconds
-
-
-
   var intTimer = setInterval(function () {
 
     document.getElementById('minutes').innerHTML = storedTime + ':' + _storedSec;
-
-
     _storedSec--;
 
     if (_storedSec < 0 && time > 0) {
       _storedSec = 59
-
       time -= 1;
       storedTime -= 1;
     }
 
   }, 1000);
- 
   clearInt = intTimer;
-
 }
-
-
-
 
 class Structure extends React.Component {
   constructor(props) {
     super(props)
   }
   render() {
-
     return (
       <div>
         <Link href="../" passHref>
@@ -132,9 +106,7 @@ class Structure extends React.Component {
         </Link>
         <hr />
         <header> <h1>Pomodoro</h1></header>
-
         <div id={styles.MainBG}>
-
           <img id={styles.stem} src="/pomBGstem.png" alt="" />
           <div id={styles.PomodoroBox}>
             <div id={styles.container}>
@@ -146,7 +118,6 @@ class Structure extends React.Component {
                 </div>
                 <div > <h3> Session Length: {this.props.timer}</h3>
                   <p>
-
                     <button id={styles.buttonStyle} onClick={this.props.handleRemoveCount}>-</button>
                     <button id={styles.buttonStyle} onClick={this.props.handleCount}>+</button></p>
                 </div>
@@ -155,12 +126,8 @@ class Structure extends React.Component {
               <button onClick={this.props.session}>Start/Stop</button>
               <button onClick={this.props.reset}>Reset</button>
               <button onClick={this.props.fastForward}>Fast Forward</button>
-
-
-
             </div>
           </div>
-
         </div>
         <footer><a href="https://github.com/Danieda/Fcc-FrontEnd-React-Redux-Certificate"><h3>View Source</h3></a></footer>
       </div>
