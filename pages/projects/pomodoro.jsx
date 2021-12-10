@@ -50,12 +50,7 @@ switch(action.type)
       return(clearInterval(clearInt),
       state = SESSION_MODE)
     }
-    else if(action.play =="reset"){
-      return(
-        clearInt(clearInt),
-        state = SESSION_MODE
-      )
-    }
+   
 }
 
   case BREAK_MODE:{
@@ -92,7 +87,12 @@ function checkStatus(current_mode, time, play, sessEnd, breaks)
   else if(play == "pause"){
    
   }
-  
+  if(play =="reset"){
+
+    
+      clearInterval(clearInt)
+       document.getElementById('seconds').innerHTML= "--:--";
+  }
  
  
 
@@ -122,7 +122,7 @@ function Intervals(time, timeStop, play, breaks){
       
       if(breaks == time && sec <= 0){
         clearInterval(intTimer);  
-       
+        
      }
    
   }, 1000);
@@ -184,7 +184,7 @@ class Structure extends React.Component{
               <button onClick={this.props.session}>Start/Stop</button>
               <button onClick={this.props.reset}>Reset</button>
               <button onClick={this.props.fastForward}>Fast Forward</button>
-              
+              {this.props.storedTime}
               
         
             </div>
@@ -246,13 +246,15 @@ class Pomodoro extends React.Component{
 
   handleAddCount() {
     this.setState({
-      timer: check(this.state.timer + 1)
+      timer: check(this.state.timer + 1),
+      storeTime: this.state.timer
     })
   }
   handleRemoveCount() {
     this.setState({
     
-      timer: check(this.state.timer - 1)
+      timer: check(this.state.timer - 1),
+      storedTime: this.state.timer
       
     })
   }
@@ -286,10 +288,9 @@ handleFastForward(){
         <Structure breakTime={this.state.breakTime} timer={this.state.timer} handleCount={this.handleAddCount}
          handleRemoveCount={this.handleRemoveCount} breakAdd={this.handleBreakAdd}
          breakRemove={this.handleBreakRemove} reset={this.handleReset} fastForward={this.handleFastForward}
-         session={this.handleStatusChange} status={this.props.status} play={this.state.play} sessionEnd={this.state.sessionEnd}/>
-         {this.state.timer}
-          {this.state.play}
-          {this.state.sessionEnd}
+         session={this.handleStatusChange} status={this.props.status} play={this.state.play} sessionEnd={this.state.sessionEnd}
+         storedTime={this.state.storedTime}/>
+ 
         </div>
     )
   }
