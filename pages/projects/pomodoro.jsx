@@ -81,7 +81,7 @@ function checkStatus(current_mode, time, play, sessEnd, breaks) {
   if (play == "FastForward") {
     clearInterval(clearInt)
 
-    document.getElementById('seconds').innerHTML = time = breaks + ":" + "00"
+  //  document.getElementById('minutes').innerHTML = time = breaks + ":" + "00"
   }
 }
 
@@ -107,9 +107,6 @@ function Intervals(time) {
       time -= 1;
       storedTime -= 1;
     }
-
-   
-    
 
   }, 1000);
  
