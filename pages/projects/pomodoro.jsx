@@ -14,14 +14,16 @@ const BREAK_MODE = 'BREAK'
 let current_mode = SESSION_MODE
 var storedSeconds = 0
 var storedTime = 10
+var clearInt;
 
 
-const addStatus = (status, time, playStatus) => {
+const addStatus = (status, time, playStatus, breakSess) => {
   return {
     type: status,
     status: status,
     time: time,
-    playStatus: playStatus
+    playStatus: playStatus,
+    breakSess: breakSess
   }
 }
 
@@ -31,7 +33,7 @@ const timerReducer = (state = current_mode, action) => {
       if (action.playStatus == "pause") {
         return (
           clearInterval(clearInt),
-          Intervals(action.time),
+          Intervals(action.breakSess),
           state = SESSION_MODE
         )
       }
@@ -57,10 +59,7 @@ function checkStatus(current_mode, time, play, sessEnd, breaks) {
   if (sessEnd == "true" && play == "pause") {
     return time = "--"
   }
-  if (current_mode == SESSION_MODE) {
-  }
   if (play == "reset") {
-
     clearInterval(clearInt)
     document.getElementById('minutes').innerHTML = "--:--";
     storedTime = time
@@ -74,22 +73,23 @@ function checkStatus(current_mode, time, play, sessEnd, breaks) {
   }
 }
 
-var clearInt;
 
-function Intervals(time) {
+
+function Intervals( _breaktime) {
 
   var _storedSec = storedSeconds
   var intTimer = setInterval(function () {
-
+    if(storedTime == _breaktime && _storedSec === 0)
+    {
+     
+      clearInterval(intTimer)
+    }
     document.getElementById('minutes').innerHTML = storedTime + ':' + _storedSec;
     _storedSec--;
-
-    if (_storedSec < 0 && time > 0) {
+if (_storedSec < 0 && storedTime > 1) {
       _storedSec = 59
-      time -= 1;
       storedTime -= 1;
     }
-
   }, 1000);
   clearInt = intTimer;
 }
@@ -162,7 +162,8 @@ class Pomodoro extends React.Component {
       timer: 10,
       breakTime: 5,
       play: "pause",
-      sessionEnd: "true"
+      sessionEnd: "true",
+    
     }
     this.handleAddCount = this.handleAddCount.bind(this)
     this.handleRemoveCount = this.handleRemoveCount.bind(this)
@@ -173,7 +174,7 @@ class Pomodoro extends React.Component {
     this.handleStatusChange = this.handleStatusChange.bind(this)
   }
   handleStatusChange() {
-    this.props.submitNewStatus(SESSION_MODE, this.state.timer, this.state.play)
+    this.props.submitNewStatus(SESSION_MODE, this.state.timer, this.state.play, this.state.breakTime)
     this.setState({
       play: playStatus(this.state.play),
       sessionEnd: oneSession(this.state.sessionEnd, this.state.timer, this.state.play)
@@ -183,8 +184,7 @@ class Pomodoro extends React.Component {
   handleAddCount() {
     storedTime += 1
     this.setState({
-      timer: check(this.state.timer + 1),
-      storeTime: this.state.timer
+      timer: check(this.state.timer + 1)
     })
   }
   handleRemoveCount() {
@@ -243,8 +243,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    submitNewStatus: (newStatus, time, playStatus) => {
-      dispatch(addStatus(newStatus, time, playStatus))
+    submitNewStatus: (newStatus, time, playStatus, breakSess) => {
+      dispatch(addStatus(newStatus, time, playStatus, breakSess))
     }
   }
 }
