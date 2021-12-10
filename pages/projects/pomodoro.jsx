@@ -2,7 +2,6 @@ import React from "react"
 import { Provider } from "react-redux";
 import { createStore } from 'redux'
 import { connect } from 'react-redux'
-import quote from '../../fodder/quoteList.js'
 import styles from '../../styles/pomodoro.module.css'
 import Link from 'next/link'
 
@@ -11,13 +10,10 @@ import Link from 'next/link'
 const SESSION_MODE = 'SESSION'
 const BREAK_MODE = 'BREAK'
 
-let currTime = ''
-let minutes = '25'
-let seconds = '00'
+
 let current_mode = SESSION_MODE
-let inProgress = false
-let finishedTime
-let timerInterval
+var storedSeconds = 0
+var storedTime = 10
 
 
   const addStatus = (status, time, playStatus) => {
@@ -29,35 +25,40 @@ let timerInterval
     }
   }
 
-const intitialState = {
-default: SESSION_MODE
-}
+
 
 
 const timerReducer = (state = current_mode, action) => {
+
 switch(action.type)
 {
   case SESSION_MODE:{
     if(action.playStatus == "pause")
     {
       return( 
+  clearInterval(clearInt),
  
-   Intervals(action.time, action.status, action.playStatus, action.status),
+   Intervals(action.time),
+
    state = SESSION_MODE
         )
     }
     else if(action.playStatus == "start"){
       return(clearInterval(clearInt),
+     
       state = SESSION_MODE)
     }
-   
+
+
 }
 
   case BREAK_MODE:{
-      return(state = BREAK_MODE)
+   
+      return(state= BREAK_MODE)
   }
+  
   default:{
-    return(state)
+    return(state = SESSION_MODE)
     
   }
 }
@@ -68,32 +69,31 @@ const store = createStore(timerReducer)
 
 function checkStatus(current_mode, time, play, sessEnd, breaks)
 {
+
   if(sessEnd == "true" && play == "pause"){
-    return time = "--"
+    return time = "--" 
   }
-  if(sessEnd == "false"){
+  
   if(current_mode == SESSION_MODE)
   {
-
+    
   }
-  }
-  else if(current_mode == BREAK_MODE ){
-
-
-
-
-  }
+  
+  
  
-  else if(play == "pause"){
-   
-  }
   if(play =="reset"){
 
-    
-      clearInterval(clearInt)
+    clearInterval(clearInt)
        document.getElementById('seconds').innerHTML= "--:--";
+       storedTime = time
+       storedSeconds = 0
   }
- 
+  if(play == "FastForward"){
+    clearInterval(clearInt)
+
+    document.getElementById('seconds').innerHTML= time = breaks + ":" + "00"
+   
+  }
  
 
 }
@@ -101,39 +101,40 @@ function checkStatus(current_mode, time, play, sessEnd, breaks)
 
 var clearInt;
 
-function Intervals(time, timeStop, play, breaks){
-  var sec = 0;
-  var storedSeconds = 20
-  var storedTime = 10
-  var storage;
 
+function Intervals(time){
+
+  var _storedTime = storedTime
+  var _storedSec = storedSeconds
+
+  
 
     var intTimer = setInterval(function(){
       
-      document.getElementById('seconds').innerHTML= time +':'+sec;
+      document.getElementById('seconds').innerHTML=  storedTime +':'+ storedSeconds;
       
-      sec--;
-      
-      if (sec < 0 && time > 0) {
-        sec = 59;
-        time -= 1;
-         
-      }
-      
-      if(breaks == time && sec <= 0){
-        clearInterval(intTimer);  
-        
-     }
    
+      _storedSec --;
+      if (_storedSec < 0 && storedTime > 0) {
+        _storedSec = 59
+        
+        time -= 1;
+        _storedTime -= 1;
+      }
+
+      storedTime = _storedTime;
+ storedSeconds = _storedSec ;
+
   }, 1000);
-  
+
  clearInt = intTimer;
+
   }
 
 
-
+/*
 const mode = (timer, breaktime, state) => {
-  if(state == SESSION_MODE && timer == breaktime)
+  if(state == SESSION_MODE && timer == breaktime )
   {
     return current_mode = BREAK_MODE
   }
@@ -145,7 +146,7 @@ const mode = (timer, breaktime, state) => {
     return current_mode = SESSION_MODE
   }
 }
-
+*/
 
 
 class Structure extends React.Component{
@@ -184,8 +185,8 @@ class Structure extends React.Component{
               <button onClick={this.props.session}>Start/Stop</button>
               <button onClick={this.props.reset}>Reset</button>
               <button onClick={this.props.fastForward}>Fast Forward</button>
-              {this.props.storedTime}
               
+            
         
             </div>
             </div>
@@ -198,7 +199,7 @@ class Structure extends React.Component{
 }
 
 const check = (timer) => {
-
+ storedTime = timer
   if(timer >= 60)
   {
     return timer = 60
@@ -237,7 +238,7 @@ class Pomodoro extends React.Component{
     this.handleStatusChange = this.handleStatusChange.bind(this)
   }
   handleStatusChange() {
-   this.props.submitNewStatus(mode(this.state.timer, this.state.breakTime, this.props.status), this.state.timer, this.state.play)
+   this.props.submitNewStatus(SESSION_MODE, this.state.timer, this.state.play)
   this.setState({
     play: playStatus(this.state.play),
     sessionEnd: oneSession(this.state.sessionEnd, this.state.timer, this.state.play)
@@ -271,12 +272,15 @@ class Pomodoro extends React.Component{
 handleReset(){
   this.setState({
     timer: 10,
+    breakTime: 5,
     play: this.state.play = "reset"
   })
 }
 handleFastForward(){
   this.setState({
-    timer: this.state.breakTime
+    timer: this.state.breakTime,
+    play: this.state.play="FastForward"
+    
   })
 }
 
@@ -290,7 +294,7 @@ handleFastForward(){
          breakRemove={this.handleBreakRemove} reset={this.handleReset} fastForward={this.handleFastForward}
          session={this.handleStatusChange} status={this.props.status} play={this.state.play} sessionEnd={this.state.sessionEnd}
          storedTime={this.state.storedTime}/>
- 
+          {storedTime }
         </div>
     )
   }
