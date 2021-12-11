@@ -53,7 +53,7 @@ class Structure extends React.Component {
  
     return (
       <div>
-        <div className="html-editor">
+        <div className={styles.mainBG}>
           <Link href="../" passHref>
             <a><h2>Back</h2></a>
           </Link>

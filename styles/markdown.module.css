@@ -1,14 +1,14 @@
 #InputBox{
-width: 800px;
-height: 1200px;
+    width: 40vw;
+    height: 100vh;
 
 background:#9aa19d;
 border: 10px solid #232423
 }
 #InputResult{
 background: #d9d9d9;
-width: 800px;
-height: 1200px;
+width: 40vw;
+height: 100vh;
 border: 10px solid #232423;
 padding: 10px;
 word-wrap: break-word;
@@ -26,10 +26,14 @@ overflow: hidden;
     justify-content: center;
     align-items: center;
     grid-gap: 5px;
-    background: #404743;   
+    background: #404743;  
+    width: 100%; 
 }
 #textResult{
 
 color: black;
 word-wrap: break-word;
+}
+.mainBG{
+ 
 }
