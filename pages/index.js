@@ -16,8 +16,8 @@ export default function Home() {
           Welcome to my Frontend Development Libraries Certification Projects
         </h1>
           <h2>React & Redux</h2>
-      <main className={styles.container}>
-        
+      <main >
+        <div className={styles.container}>
         <img src="/logo.png" className={styles.Appheader} alt="logo"/>
         <Link href="/projects/quotes" passHref>
         <img src="/Quote.png" className={styles.box1} alt="QuoteBox"/>
@@ -34,8 +34,8 @@ export default function Home() {
         <Link href="/projects/pomodoro" passHref>
         <img src="/pom.png" className={styles.box5} alt="pomodoro"/>
         </Link>
- 
-      </main>
+      </div>
+      </main >
       <div className={styles.grid}>
       <Link href="https://github.com/Danieda/Fcc-FrontEnd-React-Redux-Certificate" passHref>
             <div className={styles.card}>
