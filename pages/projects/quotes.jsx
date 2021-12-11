@@ -153,4 +153,4 @@ class QuoteWrapper extends React.Component {
     )
   }
 }
-export default  QuoteWrapper
+export default QuoteWrapper

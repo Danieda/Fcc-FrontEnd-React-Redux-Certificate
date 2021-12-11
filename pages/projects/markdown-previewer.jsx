@@ -4,7 +4,7 @@ import { createStore } from 'redux'
 import { connect } from 'react-redux'
 import Link from 'next/link'
 import styles from '../../styles/markdown.module.css'
-import {marked} from 'marked'
+import { marked } from 'marked'
 
 const ADD = 'ADD'
 
@@ -23,17 +23,17 @@ const InputReducer = (state = defaultState.default, action) => {
   switch (action.type) {
     case ADD:
       {
-        return(
+        return (
           state = action.input
         )
-       
+
       }
-      default:{
-        return(
-          state = defaultState.default
-        )
-       
-      }
+    default: {
+      return (
+        state = defaultState.default
+      )
+
+    }
   }
 }
 const store = createStore(InputReducer)
@@ -44,13 +44,13 @@ class Structure extends React.Component {
       value: this.props.value
     }
   }
-  markup(){
+  markup() {
     return {
       __html: this.state.value
     }
   }
   render() {
- 
+
     return (
       <div>
         <div className={styles.mainBG}>
@@ -61,15 +61,15 @@ class Structure extends React.Component {
           <header> <h1>Markdown Previewer</h1></header>
 
         </div>
-      
+
         <div className='column' id={styles.holder}>
           <textarea className="text .comment_box" value={this.props.value} onChange={this.props.handle} id={styles.InputBox} />
-     
+
           <div id="nothing">
-            <div id={styles.InputResult} dangerouslySetInnerHTML={{__html:marked(this.props.value)}}/>
+            <div id={styles.InputResult} dangerouslySetInnerHTML={{ __html: marked(this.props.value) }} />
           </div>
         </div>
-       
+
         <footer><a href="https://github.com/Danieda/Fcc-FrontEnd-React-Redux-Certificate"><h3>View Source</h3></a></footer>
       </div>
     )
@@ -86,13 +86,13 @@ class MarkdownPreviewer extends React.Component {
   }
 
   inputHandler(events) {
-   //this.props.AddInput(this.state.value)
+    //this.props.AddInput(this.state.value)
     this.setState({
       value: events.target.value
-    
+
     })
   }
-  
+
 
   render() {
     return (
@@ -104,13 +104,13 @@ class MarkdownPreviewer extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return{
+  return {
     messages: state
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return{
+  return {
     submitNewMessage: (newInput) => {
       dispatch(AddInput(newInput))
     }

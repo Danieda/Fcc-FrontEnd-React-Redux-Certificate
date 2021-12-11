@@ -13,45 +13,45 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <h1 className={styles.title}>
-          Welcome to my Frontend Development Libraries Certification Projects
-        </h1>
-          <h2>React & Redux</h2>
+        Welcome to my Frontend Development Libraries Certification Projects
+      </h1>
+      <h2>React & Redux</h2>
       <main >
         <div className={styles.container}>
-        <img src="/logo.png" className={styles.Appheader} alt="logo"/>
-        <Link href="/projects/quotes" passHref>
-        <img src="/Quote.png" className={styles.box1} alt="QuoteBox"/>
-        </Link>
-        <Link href="/projects/markdown-previewer" passHref>
-        <img src="/markdown.png" className={styles.box2} alt="markdown-previewer"/>
-        </Link>
-        <Link href="/projects/drum-machine" passHref>
-        <img src="/drum.png" className={styles.box3} alt="drum-machine"/>
-        </Link>
-        <Link href="/projects/calculator" passHref>
-        <img src="/Calc.png" className={styles.box4} alt="calculator"/>
-        </Link>
-        <Link href="/projects/pomodoro" passHref>
-        <img src="/pom.png" className={styles.box5} alt="pomodoro"/>
-        </Link>
-      </div>
+          <img src="/logo.png" className={styles.Appheader} alt="logo" />
+          <Link href="/projects/quotes" passHref>
+            <img src="/Quote.png" className={styles.box1} alt="QuoteBox" />
+          </Link>
+          <Link href="/projects/markdown-previewer" passHref>
+            <img src="/markdown.png" className={styles.box2} alt="markdown-previewer" />
+          </Link>
+          <Link href="/projects/drum-machine" passHref>
+            <img src="/drum.png" className={styles.box3} alt="drum-machine" />
+          </Link>
+          <Link href="/projects/calculator" passHref>
+            <img src="/Calc.png" className={styles.box4} alt="calculator" />
+          </Link>
+          <Link href="/projects/pomodoro" passHref>
+            <img src="/pom.png" className={styles.box5} alt="pomodoro" />
+          </Link>
+        </div>
       </main >
       <div className={styles.grid}>
-      <Link href="https://github.com/Danieda/Fcc-FrontEnd-React-Redux-Certificate" passHref>
-            <div className={styles.card}>
-              <h2>My Github &rarr;</h2>
-          
-            </div>
-          </Link>
+        <Link href="https://github.com/Danieda/Fcc-FrontEnd-React-Redux-Certificate" passHref>
+          <div className={styles.card}>
+            <h2>My Github &rarr;</h2>
 
-          <Link href="https://scarletkeep.com/" className={styles.card} passHref>
-            <div className={styles.card}>
-              <h2>Our Website &rarr;</h2>
-              <p> A indie game developer website</p>
-            </div>
-          </Link>
+          </div>
+        </Link>
 
-    </div>
+        <Link href="https://scarletkeep.com/" className={styles.card} passHref>
+          <div className={styles.card}>
+            <h2>Our Website &rarr;</h2>
+            <p> A indie game developer website</p>
+          </div>
+        </Link>
+
+      </div>
 
       <footer className={styles.footer}>
         <a
@@ -59,7 +59,7 @@ export default function Home() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <hr/>
+          <hr />
           Source Code
         </a>
       </footer>
