@@ -225,8 +225,7 @@ class Pomodoro extends React.Component {
           handleRemoveCount={this.handleRemoveCount} breakAdd={this.handleBreakAdd}
           breakRemove={this.handleBreakRemove} reset={this.handleReset} fastForward={this.handleFastForward}
           session={this.handleStatusChange} status={this.props.status} play={this.state.play} sessionEnd={this.state.sessionEnd}
-          storedTime={this.state.storedTime} />
-        {storedTime}
+          storedTime={this.state.storedTime} /> 
       </div>
     )
   }
