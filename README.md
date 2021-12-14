@@ -1,4 +1,4 @@
-# Fcc-FrontEnd-js-React-Redux-Certificate
+# Fcc-FrontEnd-React-Redux-Certificate
 
 See site live at: https://vigorous-thompson-b2506f.netlify.app
 
