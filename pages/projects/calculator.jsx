@@ -5,10 +5,15 @@ import { connect } from 'react-redux'
 import Link from 'next/link'
 import styles from '../../styles/calculator.module.css'
 import { configureStore } from "@reduxjs/toolkit";
-
+import mexp from 'math-expression-evaluator'
 
 
 const ADD = "ADD"
+
+let display = '0'
+let previousResult = undefined
+let operations = []
+let errorMessage = ''
 
 const addInput = (input) => {
 return{
@@ -28,7 +33,32 @@ switch(action.type)
 }
 }
 
-
+function addOperation(op) {
+  if (operations.length > 0 && disallowedOperation(op)) {
+    return
+  } else if (MATH_SYMBOLS.includes(op) && operations.length === 0) {
+    operations = [previousResult, op]
+  } else {
+    operations.push(op)
+  }
+  errorMessage = ''
+  display = operations.join('')
+}
+function allClear() {
+  errorMessage = ''
+  operations = []
+  display = '0'
+}
+function equals() {
+  try {
+    let result = mexp.eval(operations.join(''))
+    display = result
+    previousResult = result
+    operations = []
+  } catch (error) {
+    errorMessage = error.message
+  }
+}
 
 const store = createStore(inputReducer)
 
@@ -55,7 +85,7 @@ class Structure extends React.Component {
               <button><h2 id={styles.num}>*</h2></button>
               <button><h2 id={styles.num}>7</h2></button>
               <button><h2 id={styles.num}>8</h2></button>
-              <button><h2 id={styles.num}>9</h2></button>
+              <button><h2 id={styles.num} >9</h2></button>
               <button><h2 id={styles.num}>-</h2></button>
               <button><h2 id={styles.num}>4</h2></button>
               <button><h2 id={styles.num}>5</h2></button>
@@ -83,18 +113,18 @@ class Structure extends React.Component {
 class Calculator extends React.Component {
   constructor(props) {
     super(props)
-
+    this.inputHandler = this.inputHandler.bind(this)
   }
 
   inputHandler(){
-
+  this.props.addInput(this.props.additive);
   }
 
   render() {
     return (
       <div>
 
-        <Structure />
+        <Structure input={this.inputHandler}/>
 
 
       </div>
