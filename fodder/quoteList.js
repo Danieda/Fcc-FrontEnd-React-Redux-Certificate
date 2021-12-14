@@ -44,3 +44,5 @@ var arrQuote = [
 
    
    export default arrQuote
+
+   

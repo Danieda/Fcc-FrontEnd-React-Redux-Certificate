@@ -59,7 +59,10 @@ border-radius: 15px;
    border: 10px solid #333333;
    align-items: center;
    justify-content: center;
-   
+
+   overflow: hidden;
+overflow-y: scroll;
+color: #5ad17a;
 }
 
    

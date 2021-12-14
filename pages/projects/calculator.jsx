@@ -9,30 +9,76 @@ import mexp from 'math-expression-evaluator'
 
 
 const ADD = "ADD"
+const CLEAR = "CLEAR"
+const EQUALS =" EQUALS"
+
+const MATH_SYMBOLS = ['*', '/', '-', '+']
+const DISSALLOWED_OPERATIONS = [['.', '.']]
 
 let display = '0'
 let previousResult = undefined
 let operations = []
 let errorMessage = ''
 
-const addInput = (input) => {
+const addInput = (_input) => {
 return{
-  input:input
+  type: ADD,
+  _input:_input
 }
+}
+const InitiateEquals = (_equal) => {
+  return{
+    type: EQUALS,
+    _equal:_equal
+  }
 }
 
+const InitiateClear = (_clear) => {
+return{
+  type: CLEAR,
+  _clear:_clear
+}
+}
 const inputReducer = (state = '', action) => {
 switch(action.type)
 {
   case ADD:{
-    return(state)
+    return(
+
+addOperation(action._input)
+ 
+    )
+  }
+
+  case CLEAR: {
+    return(
+      equals()
+    )
+  }
+
+  case CLEAR: {
+    return(
+      allClear()
+    )
   }
   default:{
-    return("def")
+    return(state = "...")
   }
 }
 }
 
+function disallowedOperation(op) {
+  return (
+    DISSALLOWED_OPERATIONS.filter((disallowedOps) => {
+      let previousOperation = disallowedOps[0]
+      let newOperation = disallowedOps[1]
+      return (
+        previousOperation === operations[operations.length - 1] &&
+        newOperation === op
+      )
+    }).length > 0
+  )
+}
 function addOperation(op) {
   if (operations.length > 0 && disallowedOperation(op)) {
     return
@@ -44,6 +90,7 @@ function addOperation(op) {
   errorMessage = ''
   display = operations.join('')
 }
+
 function allClear() {
   errorMessage = ''
   operations = []
@@ -79,24 +126,24 @@ class Structure extends React.Component {
           <div id={styles.calcBox}>
             <div id={styles.container} className="columns">
 
-              <div id={styles.result}>Work in Progress</div>
-              <button id={styles.AC}><h2>AC</h2></button>
-              <button><h2 id={styles.num}>/</h2></button>
-              <button><h2 id={styles.num}>*</h2></button>
-              <button><h2 id={styles.num}>7</h2></button>
-              <button><h2 id={styles.num}>8</h2></button>
-              <button><h2 id={styles.num} >9</h2></button>
-              <button><h2 id={styles.num}>-</h2></button>
-              <button><h2 id={styles.num}>4</h2></button>
-              <button><h2 id={styles.num}>5</h2></button>
-              <button><h2 id={styles.num}>6</h2></button>
-              <button><h2 id={styles.num}>+</h2></button>
-              <button><h2 id={styles.num}>1</h2></button>
-              <button><h2 id={styles.num}>2</h2></button>
-              <button><h2 id={styles.num}>3</h2></button>
-              <button id={styles.zero}><h2>0</h2></button>
-              <button><h2>.</h2></button>
-              <button id={styles.equals}><h2>=</h2></button>
+              <div id={styles.result}>{display}</div>
+             <button id={styles.AC}><h2>AC</h2></button>
+              <button id={styles.num} value={'/'} onClick={(e) => this.props.input(e, "value")}>/</button>
+              <button id={styles.num} value={'*'} onClick={(e) => this.props.input(e, "value")}>*</button>
+              <button id={styles.num} value={'7'} onClick={(e) => this.props.input(e, "value")}>7</button>
+              <button id={styles.num} value={'8'} onClick={(e) => this.props.input(e, "value")}>8</button>
+              <button id={styles.num} value={'9'} onClick={(e) => this.props.input(e, "value")}>9</button>
+              <button id={styles.num} value={'-'} onClick={(e) => this.props.input(e, "value")}>-</button>
+              <button id={styles.num} value={'4'} onClick={(e) => this.props.input(e, "value")}>4</button>
+              <button id={styles.num} value={'5'} onClick={(e) => this.props.input(e, "value")}>5</button>
+              <button id={styles.num} value={'6'} onClick={(e) => this.props.input(e, "value")}>6</button>
+              <button id={styles.num} value={'+'} onClick={(e) => this.props.input(e, "value")}>+</button>
+              <button id={styles.num} value={'1'} onClick={(e) => this.props.input(e, "value")}>1</button>
+              <button id={styles.num} value={'2'} onClick={(e) => this.props.input(e, "value")}>2</button>
+              <button id={styles.num} value={'3'} onClick={(e) => this.props.input(e, "value")}>3</button>
+              <button id={styles.zero} value={'0'} onClick={this.props.input}>0</button>
+              <button id={styles.num} value={'.'} onClick={(e) => this.props.input(e, "value")}>.</button>
+              <button id={styles.equals} value={'='} onClick={(e) => this.props.input(e, "value")}>=</button>
 
             </div>
           </div>
@@ -113,18 +160,33 @@ class Structure extends React.Component {
 class Calculator extends React.Component {
   constructor(props) {
     super(props)
+    this.state= {
+      value: ''
+    }
     this.inputHandler = this.inputHandler.bind(this)
+    this.resultHandler = this.resultHandler.bind(this)
+    this.resultHandler = this.resultHandler.bind(this)
   }
 
-  inputHandler(){
-  this.props.addInput(this.props.additive);
+  inputHandler(e){
+  
+  e.preventDefault()
+  this.setState({
+    value: e.target.value
+  })
+  this.props.submitNewInput(this.state.value);
   }
-
+ clearHandler(){
+   this.props.startClear()
+ }
+ resultHandler(){
+   this.props.result()
+ }
   render() {
     return (
       <div>
 
-        <Structure input={this.inputHandler}/>
+        <Structure value={this.state.value} input={this.inputHandler} result={this.resultHandler} clear={this.props.clearHandler}/>
 
 
       </div>
@@ -140,8 +202,14 @@ const mapStateToProps = (state)=>{
 
 const mapDispatchToProps = (dispatch) => {
   return{
-    submitNewInput : (input) => {
-      dispatch(addInput(input))
+    submitNewInput : (_input) => {
+      dispatch(addInput(_input))  
+   },
+    startClear: (_clear) => {
+      dispatch(InitiateClear(_clear))
+    },
+    result: (_equal) => {
+      dispatch(InitiateEquals(_equal))
     }
   }
 }

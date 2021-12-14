@@ -56,14 +56,10 @@ class Structure extends React.Component {
           </Link>
           <hr />
           <header> <h1>Quote Machine</h1></header> </div>
-
-
         <div id={styles.Main}>
-
           <div id={styles.QuoteBox}>
             <h2>Generate a Quote</h2>
             <div id={styles.QuoteText}>
-
               <p>{this.props.quote}</p>
               <p>{this.props.name}</p>
             </div>
@@ -82,8 +78,6 @@ class QuoteMachine extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      // messages: 'Quote?',
-      // names: 'Quotee NAME',
       value: 0
     }
     this.randomQuoteHandle = this.randomQuoteHandle.bind(this)
@@ -92,8 +86,6 @@ class QuoteMachine extends React.Component {
   randomQuoteHandle() {
     this.props.submitNewQuote(quote[this.state.value])
     this.setState({
-      // messages: quote[this.state.value].Quote,
-      //names: quote[this.state.value].Name,
       value: Math.floor(Math.random() * quote.length)
     })
   }
@@ -103,12 +95,7 @@ class QuoteMachine extends React.Component {
       return (
 
         <div>
-
-
           <Structure quote={this.props.messages.Quote} name={this.props.messages.Name} handle={this.randomQuoteHandle} />
-
-
-
           {Math.floor(Math.random() * quote.length)}
         </div>
       )
@@ -118,9 +105,7 @@ class QuoteMachine extends React.Component {
       return (
 
         <div>
-
           <Structure quote={this.props.messages.Quote} name={this.props.messages.Name} handle={this.randomQuoteHandle} />
-
         </div>
       )
     }
