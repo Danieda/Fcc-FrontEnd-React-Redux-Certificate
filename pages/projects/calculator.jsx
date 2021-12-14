@@ -50,7 +50,7 @@ addOperation(action._input)
     )
   }
 
-  case CLEAR: {
+  case EQUALS: {
     return(
       equals()
     )
@@ -92,11 +92,13 @@ function addOperation(op) {
 }
 
 function allClear() {
+  console.log("clearing..")
   errorMessage = ''
   operations = []
   display = '0'
 }
 function equals() {
+  console.log("equals..")
   try {
     let result = mexp.eval(operations.join(''))
     display = result
@@ -127,7 +129,7 @@ class Structure extends React.Component {
             <div id={styles.container} className="columns">
 
               <div id={styles.result}>{display}</div>
-             <button id={styles.AC}><h2>AC</h2></button>
+             <button id={styles.AC} onClick={this.props.clear}><h2>AC</h2></button>
               <button id={styles.num} value={'/'} onClick={(e) => this.props.input(e, "value")}>/</button>
               <button id={styles.num} value={'*'} onClick={(e) => this.props.input(e, "value")}>*</button>
               <button id={styles.num} value={'7'} onClick={(e) => this.props.input(e, "value")}>7</button>
@@ -143,12 +145,10 @@ class Structure extends React.Component {
               <button id={styles.num} value={'3'} onClick={(e) => this.props.input(e, "value")}>3</button>
               <button id={styles.zero} value={'0'} onClick={this.props.input}>0</button>
               <button id={styles.num} value={'.'} onClick={(e) => this.props.input(e, "value")}>.</button>
-              <button id={styles.equals} value={'='} onClick={(e) => this.props.input(e, "value")}>=</button>
-
+              <button id={styles.equals} onClick={this.props.result}>=</button>
             </div>
           </div>
         </div>
-
         <footer><a href="https://github.com/Danieda/Fcc-FrontEnd-React-Redux-Certificate"><h3>View Source</h3></a></footer>
       </div>
     )
@@ -165,15 +165,16 @@ class Calculator extends React.Component {
     }
     this.inputHandler = this.inputHandler.bind(this)
     this.resultHandler = this.resultHandler.bind(this)
-    this.resultHandler = this.resultHandler.bind(this)
+    this.clearHandler = this.clearHandler.bind(this)
   }
 
   inputHandler(e){
+  this.props.submitNewInput(e.target.value);
   e.preventDefault()
   this.setState({
     value: e.target.value
   })
-  this.props.submitNewInput(e.target.value);
+ 
   }
  clearHandler(){
    this.props.startClear()
@@ -184,10 +185,7 @@ class Calculator extends React.Component {
   render() {
     return (
       <div>
-
-        <Structure value={this.state.value} input={this.inputHandler} result={this.resultHandler} clear={this.props.clearHandler}/>
-
-
+        <Structure value={this.state.value} input={this.inputHandler} result={this.resultHandler} clear={this.clearHandler}/>
       </div>
     )
   }
