@@ -15,7 +15,7 @@ const EQUALS =" EQUALS"
 const MATH_SYMBOLS = ['*', '/', '-', '+']
 const DISSALLOWED_OPERATIONS = [['.', '.']]
 
-let display = '0'
+let display = 'Work In Progress'
 let previousResult = undefined
 let operations = []
 let errorMessage = ''
