@@ -10,4 +10,4 @@ This site is built with [React](https://reactjs.org/), and Redux to complete the
 
 ## Deployment
 
-- ``npm build`
+- `npm build`
