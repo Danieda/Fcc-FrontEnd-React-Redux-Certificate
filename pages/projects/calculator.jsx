@@ -15,7 +15,7 @@ const EQUALS =" EQUALS"
 const MATH_SYMBOLS = ['*', '/', '-', '+']
 const DISSALLOWED_OPERATIONS = [['.', '.' ,'*', '/', '-', '+']]
 
-let display = 'Work In Progress'
+let display = '0'
 let previousResult = undefined
 let operations = []
 let errorMessage = ''
@@ -62,7 +62,7 @@ addOperation(action._input)
     )
   }
   default:{
-    return(state = "...")
+    return(state = "0")
   }
 }
 }
@@ -96,6 +96,7 @@ function allClear() {
   errorMessage = ''
   operations = []
   display = '0'
+  return display
 }
 function equals() {
   console.log("equals..")
@@ -107,6 +108,7 @@ function equals() {
   } catch (error) {
     errorMessage = error.message
   }
+  return display;
 }
 
 const store = createStore(inputReducer)
