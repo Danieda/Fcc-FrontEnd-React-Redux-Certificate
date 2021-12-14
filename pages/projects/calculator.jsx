@@ -4,6 +4,34 @@ import { createStore } from 'redux'
 import { connect } from 'react-redux'
 import Link from 'next/link'
 import styles from '../../styles/calculator.module.css'
+import { configureStore } from "@reduxjs/toolkit";
+
+
+
+const ADD = "ADD"
+
+const addInput = (input) => {
+return{
+  input:input
+}
+}
+
+const inputReducer = (state = '', action) => {
+switch(action.type)
+{
+  case ADD:{
+    return(state)
+  }
+  default:{
+    return("def")
+  }
+}
+}
+
+
+
+const store = createStore(inputReducer)
+
 
 class Structure extends React.Component {
   constructor(props) {
@@ -55,6 +83,11 @@ class Structure extends React.Component {
 class Calculator extends React.Component {
   constructor(props) {
     super(props)
+
+  }
+
+  inputHandler(){
+
   }
 
   render() {
@@ -69,4 +102,31 @@ class Calculator extends React.Component {
   }
 }
 
-export default Calculator
+const mapStateToProps = (state)=>{
+  return{
+   additive: state
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return{
+    submitNewInput : (input) => {
+      dispatch(addInput(input))
+    }
+  }
+}
+
+const Container = connect(mapStateToProps, mapDispatchToProps)(Calculator)
+
+class CalculatorWrapper extends React.Component{
+  render(){
+    return(
+      <Provider store={store}>
+      <Container/>
+  </Provider>
+    )
+
+  }
+}
+
+export default CalculatorWrapper
