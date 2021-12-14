@@ -13,7 +13,7 @@ const CLEAR = "CLEAR"
 const EQUALS =" EQUALS"
 
 const MATH_SYMBOLS = ['*', '/', '-', '+']
-const DISSALLOWED_OPERATIONS = [['.', '.']]
+const DISSALLOWED_OPERATIONS = [['.', '.' ,'*', '/', '-', '+']]
 
 let display = 'Work In Progress'
 let previousResult = undefined
@@ -169,12 +169,11 @@ class Calculator extends React.Component {
   }
 
   inputHandler(e){
-  
   e.preventDefault()
   this.setState({
     value: e.target.value
   })
-  this.props.submitNewInput(this.state.value);
+  this.props.submitNewInput(e.target.value);
   }
  clearHandler(){
    this.props.startClear()
